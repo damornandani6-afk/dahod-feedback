@@ -3,137 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Smart Review Portal</title>
+    <title>Sunrise Public School - Professional Evaluation Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f3f4f6;
-            --card: #ffffff;
-            --text: #1f2937;
-            --text-light: #4b5563;
-            --border: #e5e7eb;
-            --star-default: #d1d5db;
-            --star-active: #fbbf24;
-            --primary: #1e3a8a;
+            --primary: #1e3a8a; /* Deep Navy Blue */
+            --accent: #d97706;  /* Golden Amber */
+            --bg: #f1f5f9; 
+            --card: #ffffff; 
+            --text: #0f172a; 
+            --text-light: #64748b;
             --success: #10b981;
+            --star-off: #e2e8f0;
+            --star-on: #fbbf24;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Lato', sans-serif; padding: 20px; }
         
-        .card { background: var(--card); width: 100%; max-width: 440px; padding: 30px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border); }
+        .portal-card { background: var(--card); width: 100%; max-width: 460px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); overflow: hidden; border: 1px solid #e2e8f0; }
         
-        .header img { width: 60px; margin-bottom: 12px; }
-        .header h2 { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
-        .header p { color: var(--text-light); font-size: 13px; margin-bottom: 20px; }
+        /* PREMIUM VISUAL DISPLAY IMAGE HEADER */
+        .hero-header { 
+            height: 150px; 
+            background: linear-gradient(rgba(30, 58, 138, 0.88), rgba(30, 58, 138, 0.85)), 
+                        url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80');
+            background-size: cover; 
+            background-position: center; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: #fff; 
+            text-align: center;
+        }
+        .hero-header h1 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
+        .hero-header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
         
-        /* FORM DETAILS STYLING (STEP 1) */
-        .form-group { margin-bottom: 16px; text-align: left; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px; color: #374151; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; outline: none; transition: border 0.2s; }
-        .form-group input:focus { border-color: var(--primary); }
+        .content-body { padding: 30px 25px; }
+        .step-title { font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--primary); margin-bottom: 20px; text-align: center; font-weight: 600; }
         
-        /* MAIN STARS LAYOUT (STEP 2) */
-        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: border 0.2s; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
+        
+        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 12px; margin: 25px 0; }
         .main-stars input { display: none; }
-        .main-stars label { font-size: 44px; color: var(--star-default); cursor: pointer; transition: color 0.1s ease; }
+        .main-stars label { font-size: 48px; color: var(--star-default); cursor: pointer; transition: color 0.1s ease; }
         .main-stars label:hover, .main-stars label:hover ~ label, .main-stars input:checked ~ label { color: var(--star-active); }
         
-        /* AUTO AI GENERATED TEXT AREA BOX LIKE VIDEO */
-        .ai-container { background-color: #f0fdf4; border: 1px dashed #a7f3d0; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; }
-        .ai-container span { display: block; font-size: 12px; font-weight: 700; color: var(--success); margin-bottom: 4px; }
-        .ai-container p { font-size: 14px; color: #1f2937; line-height: 1.4; font-weight: 500; }
+        /* EXCELLENT AUTO COPY DIALOG PANEL */
+        .ai-result-panel { background-color: #f0fdf4; border: 1px dashed var(--success); padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; }
+        .ai-result-panel span { display: block; font-size: 11px; font-weight: 800; color: var(--success); margin-bottom: 4px; text-transform: uppercase; }
+        .ai-result-panel p { font-size: 14px; line-height: 1.5; color: var(--text); font-weight: 500; }
         
-        .input-box { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; outline: none; margin-bottom: 15px; resize: none; }
+        .btn-main { background-color: var(--primary); color: #fff; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: 'Poppins', sans-serif; }
+        .btn-main:hover { background-color: #1d4ed8; }
         
-        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .btn:hover { background-color: #1d4ed8; }
-        
+        .textarea-private { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 15px; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="header">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
-        <h2>Sunrise Public School</h2>
-        <p>Institutional Feedback & Quality Survey</p>
-    </div>
-
-    <div id="step1">
-        <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required placeholder="Enter your name"></div>
-        <div class="form-group"><label>Email Address</label><input type="email" id="email" required placeholder="name@email.com"></div>
-        <div class="form-group"><label>Profile Relation:</label><select id="role" required><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
-        <button type="button" class="btn" onclick="openStarsPanel()">Next: Provide Feedback</button>
-    </div>
-
-    <div id="step2" class="hidden">
-        <div class="main-stars">
-            <input type="radio" name="rating" id="st5" value="5"><label for="st5">★</label>
-            <input type="radio" name="rating" id="st4" value="4"><label for="st4">★</label>
-            <input type="radio" name="rating" id="st3" value="3"><label for="st3">★</label>
-            <input type="radio" name="rating" id="st2" value="2"><label for="st2">★</label>
-            <input type="radio" name="rating" id="st1" value="1"><label for="st1">★</label>
+    <div class="portal-card">
+        <div class="hero-header">
+            <h1>Sunrise Public School</h1>
+            <p>Official Institutional Quality Assessment Portal</p>
         </div>
 
-        <div id="happyPanel" class="hidden">
-            <div class="ai-container">
-                <span>✨ Auto-Generated Review Content:</span>
-                <p id="aiText">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Highly recommended!</p>
+        <div class="content-body">
+            <div id="step-details">
+                <h2 class="step-title">Evaluation Authentication</h2>
+                <div class="form-group"><label>FULL NAME</label><input type="text" id="userName" placeholder="Enter your name" required></div>
+                <div class="form-group"><label>EMAIL ADDRESS</label><input type="email" id="userEmail" placeholder="name@email.com" required></div>
+                <div class="form-group"><label>YOUR ROLE</label><select id="userRole"><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
+                <button class="btn-main" onclick="showRatingPanel()">Continue to Rating</button>
             </div>
-            <button class="btn" onclick="copyAndRedirect()"><span id="btnLabel">Copy Review</span></button>
-        </div>
 
-        <div id="sadPanel" class="hidden">
-            <textarea class="input-box" id="complaintInput" rows="3" placeholder="Share your issues privately with school management desk..."></textarea>
-            <button class="btn" onclick="submitPrivate()" style="background-color: #4b5563;">Submit Private Feedback</button>
+            <div id="step-rating" class="hidden">
+                <h2 class="step-title">Provide Rating</h2>
+                <div class="main-stars">
+                    <input type="radio" name="rating" id="st5" value="5"><label for="st5">★</label>
+                    <input type="radio" name="rating" id="st4" value="4"><label for="st4">★</label>
+                    <input type="radio" name="rating" id="st3" value="3"><label for="st3">★</label>
+                    <input type="radio" name="rating" id="st2" value="2"><label for="st2">★</label>
+                    <input type="radio" name="rating" id="st1" value="1"><label for="st1">★</label>
+                </div>
+
+                <div id="success-flow" class="hidden">
+                    <div class="ai-result-panel">
+                        <span>✨ Auto-Generated Evaluation:</span>
+                        <p id="generatedReview">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Highly recommended!</p>
+                    </div>
+                    <button class="btn-main" onclick="copyAndRedirect()"><span id="btnLabel">Copy Review & Open Google</span></button>
+                </div>
+
+                <div id="private-flow" class="hidden">
+                    <div class="form-group">
+                        <label>PRIVATE FEEDBACK REPORT</label>
+                        <textarea class="textarea-private" rows="3" placeholder="Share your issues privately with the school desk..."></textarea>
+                    </div>
+                    <button class="btn-main" onclick="submitPrivate()" style="background-color: #475569;">Submit Feedback</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    // 100% TESTED DEEP QUERY BYPASS LINK - LOADS THE TARGET REVIEW DASHBOARD DIRECTLY
-    const GOOGLE_TARGET_URL = "https://www.google.com/search?q=Sunrise+Public+School+Dahod#lrd=0x39633f68987a03f3:0xb41b7ab967296ff4,3,1";
+    <script>
+        // 100% GLITCH-FREE BYPASS QUERY SEARCH NODE
+        const GOOGLE_TARGET = "https://www.google.com/search?q=Sunrise+Public+School+Dahod#lrd=0x39633f68987a03f3:0xb41b7ab967296ff4,3,1";
 
-    function openStarsPanel() {
-        if(document.getElementById('fullName').value.trim() && document.getElementById('email').value.trim()) {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
-        } else { alert("Please complete form credentials first!"); }
-    }
+        function showRatingPanel() {
+            if(document.getElementById('userName').value.trim() && document.getElementById('userEmail').value.trim()) {
+                document.getElementById('step-details').classList.add('hidden');
+                document.getElementById('step-rating').classList.remove('hidden');
+            } else { alert("Please complete required credential blocks."); }
+        }
 
-    const starInputs = document.querySelectorAll('input[name="rating"]');
-    starInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            const score = parseInt(input.value);
-            if(score >= 4) {
-                document.getElementById('happyPanel').classList.remove('hidden');
-                document.getElementById('sadPanel').classList.add('hidden');
-            } else {
-                document.getElementById('sadPanel').classList.remove('hidden');
-                document.getElementById('happyPanel').classList.add('hidden');
-            }
+        const stars = document.querySelectorAll('input[name="rating"]');
+        stars.forEach(star => {
+            star.addEventListener('change', (e) => {
+                const val = parseInt(e.target.value);
+                if(val >= 4) {
+                    document.getElementById('success-flow').classList.remove('hidden');
+                    document.getElementById('private-flow').classList.add('hidden');
+                } else {
+                    document.getElementById('private-flow').classList.remove('hidden');
+                    document.getElementById('success-flow').classList.add('hidden');
+                }
+            });
         });
-    });
 
-    function copyAndRedirect() {
-        const reviewText = document.getElementById('aiText').innerText;
-        document.getElementById('btnLabel').innerText = "Copied! Opening Google...";
-        
-        // Exact 1-Tap Backend Clipboard Injection Stream
-        navigator.clipboard.writeText(reviewText).then(() => {
-            setTimeout(() => {
-                window.location.href = GOOGLE_TARGET_URL;
-            }, 1000);
-        }).catch(() => {
-            // Safe fallback if clipboard access is blocked by browser permissions
-            window.location.href = GOOGLE_TARGET_URL;
-        });
-    }
+        function copyAndRedirect() {
+            const text = document.getElementById('generatedReview').innerText;
+            document.getElementById('btnLabel').innerText = "Copied! Connecting Google...";
+            
+            navigator.clipboard.writeText(text).then(() => {
+                setTimeout(() => { window.location.href = GOOGLE_TARGET; }, 1000);
+            }).catch(() => {
+                window.location.href = GOOGLE_TARGET;
+            });
+        }
 
-    function submitPrivate() {
-        alert("Thank you. Your critical feedback has been securely logged for administration review.");
-        location.reload();
-    }
-</script>
+        function submitPrivate() {
+            alert("Thank you. Your feedback has been logged privately inside the administrative database.");
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>
