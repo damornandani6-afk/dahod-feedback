@@ -3,216 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise Public School - Institutional Survey</title>
+    <title>Sunrise Public School - Executive Survey Portal</title>
     <style>
         :root { 
-            --primary: #1e3a8a; 
-            --primary-light: #eff6ff;
+            --primary: #0f172a; /* Sophisticated Dark Slate */
+            --accent: #d97706;  /* Rich Golden Amber */
             --bg: #f8fafc; 
             --card: #ffffff; 
-            --text: #0f172a; 
+            --text: #1e293b; 
             --text-light: #64748b;
-            --border: #e2e8f0; 
+            --border: #cbd5e1;
+            --star-default: #e2e8f0;
+            --star-active: #fbbf24; 
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         
-        .card { background: var(--card); width: 100%; max-width: 550px; padding: 40px 35px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+        .card { background: var(--card); width: 100%; max-width: 550px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; overflow: hidden; }
         
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--primary-light); padding-bottom: 20px; }
-        .header h2 { color: var(--primary); font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
-        .header p { color: var(--text-light); font-size: 14px; font-weight: 500; }
+        /* Premium School Themed Visual Header */
+        .banner-graphic { 
+            width: 100%; 
+            height: 140px; 
+            background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(217,119,6,0.85)), 
+                        url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .banner-graphic h2 { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .banner-graphic p { font-size: 13px; font-weight: 500; color: #f1f5f9; text-shadow: 0 1px 2px rgba(0,0,0,0.3); margin-top: 4px; }
+        
+        .form-container { padding: 35px 30px; }
         
         .form-group { margin-bottom: 22px; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #334155; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 15px; outline: none; background-color: #fdfdfd; transition: all 0.2s; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background-color: #fff; box-shadow: 0 0 0 4px rgba(30,58,138,0.08); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: all 0.2s; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(217,119,6,0.1); }
         
-        .question-block { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #f1f5f9; }
-        .question-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 16px; line-height: 1.5; }
+        .question-block { margin-bottom: 26px; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9; }
+        .question-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 12px; line-height: 1.5; }
         
-        /* Premium Rating Row Matrix */
-        .matrix-row { display: flex; justify-content: space-between; gap: 6px; }
-        .matrix-cell { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; }
+        /* Interactive Star Matrix Layout */
+        .star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; }
+        .star-rating input { display: none; }
+        .star-rating label { font-size: 36px; color: var(--star-default); cursor: pointer; transition: transform 0.1s, color 0.15s; }
+        .star-rating label:active { transform: scale(0.9); }
         
-        /* Mini indicators over buttons */
-        .indicator-text { font-size: 10px; font-weight: 600; color: var(--text-light); margin-bottom: 6px; text-align: center; white-space: nowrap; }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label { color: var(--star-active); }
         
-        .matrix-cell input { display: none; }
-        .matrix-cell label { display: block; width: 100%; padding: 12px 0; text-align: center; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 15px; background-color: #fff; transition: all 0.15s ease; color: #475569; }
+        .good-box { background-color: #f0fdf4; border: 2px dashed #bbf7d0; border-radius: 14px; padding: 20px; margin-top: 15px; }
+        .bad-box { background-color: #fef2f2; border: 2px dashed #fee2e2; border-radius: 14px; padding: 20px; margin-top: 15px; }
         
-        /* Highlighting Matrix Hover and Selection */
-        .matrix-cell label:hover { background-color: var(--primary-light); color: var(--primary); border-color: var(--primary); }
-        .matrix-cell input:checked + label { background-color: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(30,58,138,0.15); }
-        
-        /* Smart Magic Funnel Boxes */
-        .good-box { background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px; margin-top: 20px; animation: slideDown 0.3s ease; }
-        .bad-box { background-color: #fef2f2; border: 1px solid #fee2e2; border-radius: 12px; padding: 20px; margin-top: 20px; animation: slideDown 0.3s ease; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 16px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: all 0.2s; }
-        .btn:hover { background-color: #1d4ed8; transform: translateY(-1px); }
+        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .btn:hover { background-color: #1e293b; border-bottom: 3px solid var(--accent); }
         
         .hidden { display: none; }
-        .loader-screen { text-align: center; padding: 30px 10px; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin: 20px auto; }
+        .loader-screen { text-align: center; padding: 40px 20px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 25px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="header">
+    <div class="banner-graphic">
         <h2>Sunrise Public School</h2>
-        <p>Official Academic Evaluation Survey</p>
+        <p>Official Institutional Quality Assessment Survey</p>
     </div>
 
-    <form id="premiumForm">
-        <div id="step1">
-            <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required placeholder="Enter your full name"></div>
-            <div class="form-group"><label>Email Address</label><input type="email" id="email" required placeholder="name@email.com"></div>
-            <div class="form-group"><label>Relationship Profile:</label><select id="role" required><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
-            <button type="button" class="btn" onclick="nextSection()">Next: Begin Survey</button>
+    <div class="form-container">
+        <form id="grandEvaluationForm">
+            <div id="step1">
+                <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required placeholder="Enter your full name"></div>
+                <div class="form-group"><label>Email Address</label><input type="email" id="email" required placeholder="name@email.com"></div>
+                <div class="form-group"><label>Survey Profile:</label><select id="role" required><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
+                <button type="button" class="btn" onclick="nextSection()">Next: Begin Assessment</button>
+            </div>
+
+            <div id="step2" class="hidden">
+                
+                <div class="question-block">
+                    <div class="question-title">1. Rate the school management, administration, and support desk response:</div>
+                    <div class="star-rating">
+                        <input type="radio" name="q1" id="q1_5" value="5" required><label for="q1_5">★</label>
+                        <input type="radio" name="q1" id="q1_4" value="4"><label for="q1_4">★</label>
+                        <input type="radio" name="q1" id="q1_3" value="3"><label for="q1_3">★</label>
+                        <input type="radio" name="q1" id="q1_2" value="2"><label for="q1_2">★</label>
+                        <input type="radio" name="q1" id="q1_1" value="1"><label for="q1_1">★</label>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-title">2. Rate the quality of academic teaching, lectures, and faculty behavior:</div>
+                    <div class="star-rating">
+                        <input type="radio" name="q2" id="q2_5" value="5" required><label for="q2_5">★</label>
+                        <input type="radio" name="q2" id="q2_4" value="4"><label for="q2_4">★</label>
+                        <input type="radio" name="q2" id="q2_3" value="3"><label for="q2_3">★</label>
+                        <input type="radio" name="q2" id="q2_2" value="2"><label for="q2_2">★</label>
+                        <input type="radio" name="q2" id="q2_1" value="1"><label for="q2_1">★</label>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-title">3. Rate classroom infrastructure, sports complexes, labs, and overall campus hygiene:</div>
+                    <div class="star-rating">
+                        <input type="radio" name="q3" id="q3_5" value="5" required><label for="q3_5">★</label>
+                        <input type="radio" name="q3" id="q3_4" value="4"><label for="q3_4">★</label>
+                        <input type="radio" name="q3" id="q3_3" value="3"><label for="q3_3">★</label>
+                        <input type="radio" name="q3" id="q3_2" value="2"><label for="q3_2">★</label>
+                        <input type="radio" name="q3" id="q3_1" value="1"><label for="q3_1">★</label>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-title">4. Rate campus security enforcement, continuous CCTV monitoring, and child transit safety:</div>
+                    <div class="star-rating">
+                        <input type="radio" name="q4" id="q4_5" value="5" required><label for="q4_5">★</label>
+                        <input type="radio" name="q4" id="q4_4" value="4"><label for="q4_4">★</label>
+                        <input type="radio" name="q4" id="q4_3" value="3"><label for="q4_3">★</label>
+                        <input type="radio" name="q4" id="q4_2" value="2"><label for="q4_2">★</label>
+                        <input type="radio" name="q4" id="q4_1" value="1"><label for="q4_1">★</label>
+                    </div>
+                </div>
+
+                <div class="question-block" style="background-color: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                    <div class="question-title" style="color: var(--accent);">5. Give your OVERALL institutional rating for Sunrise Public School:</div>
+                    <div class="star-rating">
+                        <input type="radio" name="q8" id="q8_5" value="5" required onclick="checkGate(5)"><label for="q8_5">★</label>
+                        <input type="radio" name="q8" id="q8_4" value="4" onclick="checkGate(4)"><label for="q8_4">★</label>
+                        <input type="radio" name="q8" id="q8_3" value="3" onclick="checkGate(3)"><label for="q8_3">★</label>
+                        <input type="radio" name="q8" id="q8_2" value="2" onclick="checkGate(2)"><label for="q8_2">★</label>
+                        <input type="radio" name="q8" id="q8_1" value="1" onclick="checkGate(1)"><label for="q8_1">★</label>
+                    </div>
+                </div>
+
+                <div id="goodBox" class="good-box hidden">
+                    <label style="color: #16a34a; font-weight:700; font-size:14px; display:block; margin-bottom:6px;">What parameters satisfied you the most? Share below:</label>
+                    <textarea id="goodText" rows="3" placeholder="Excellent teachers, highly recommended..."></textarea>
+                </div>
+
+                <div id="badBox" class="bad-box hidden">
+                    <label style="color: #dc2626; font-weight:700; font-size:14px; display:block; margin-bottom:6px;">What went wrong? Submit a private notice to management desk:</label>
+                    <textarea id="badText" rows="3" placeholder="Share your issues privately..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Submit Executive Assessment</button>
+            </div>
+        </form>
+
+        <div id="loaderScreen" class="hidden loader-screen">
+            <h3 id="statusHeading" style="color: var(--primary); font-size:22px; font-weight:700; margin-bottom:8px;">Verification Successful!</h3>
+            <div class="spinner"></div>
+            <p id="statusSubtext" style="color: var(--text-light); font-size:14px;">Loading Google Assessment Node...</p>
         </div>
-
-        <div id="step2" class="hidden">
-            
-            <div class="question-block">
-                <div class="question-title">1. Rate the school management, administration, and support desk response:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q1" id="q1_1" value="1" required><label for="q1_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q1" id="q1_2" value="2"><label for="q1_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q1" id="q1_3" value="3"><label for="q1_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q1" id="q1_4" value="4"><label for="q1_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q1" id="q1_5" value="5"><label for="q1_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="question-title">2. Rate the quality of academic teaching, lectures, and faculty behavior:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q2" id="q2_1" value="1" required><label for="q2_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q2" id="q2_2" value="2"><label for="q2_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q2" id="q2_3" value="3"><label for="q2_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q2" id="q2_4" value="4"><label for="q2_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q2" id="q2_5" value="5"><label for="q2_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="question-title">3. Rate the classroom infrastructure, science labs, and hygiene status:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q3" id="q3_1" value="1" required><label for="q3_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q3" id="q3_2" value="2"><label for="q3_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q3" id="q3_3" value="3"><label for="q3_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q3" id="q3_4" value="4"><label for="q3_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q3" id="q3_5" value="5"><label for="q3_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="question-title">4. Rate campus security protocols, CCTV setup, and pupil transit safety:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q4" id="q4_1" value="1" required><label for="q4_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q4" id="q4_2" value="2"><label for="q4_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q4" id="q4_3" value="3"><label for="q4_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q4" id="q4_4" value="4"><label for="q4_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q4" id="q4_5" value="5"><label for="q4_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="question-title">5. Rate school alerts for syllabus execution, exam tables, and diaries:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q5" id="q5_1" value="1" required><label for="q5_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q5" id="q5_2" value="2"><label for="q5_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q5" id="q5_3" value="3"><label for="q5_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q5" id="q5_4" value="4"><label for="q5_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q5" id="q5_5" value="5"><label for="q5_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="question-title">6. Rate course-book balance, homework stress levels, and study curriculum:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q6" id="q6_1" value="1" required><label for="q6_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q6" id="q6_2" value="2"><label for="q6_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q6" id="q6_3" value="3"><label for="q6_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q6" id="q6_4" value="4"><label for="q6_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q6" id="q6_5" value="5"><label for="q6_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="question-title">7. Rate encouraging activities for annual functions, art tournaments, and sports:</div>
-                <div class="matrix-row">
-                    <div class="matrix-cell"><span class="indicator-text">Poor</span><input type="radio" name="q7" id="q7_1" value="1" required><label for="q7_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q7" id="q7_2" value="2"><label for="q7_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q7" id="q7_3" value="3"><label for="q7_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">V.Good</span><input type="radio" name="q7" id="q7_4" value="4"><label for="q7_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Excellent</span><input type="radio" name="q7" id="q7_5" value="5"><label for="q7_5">5</label></div>
-                </div>
-            </div>
-
-            <div class="question-block" style="background-color: var(--primary-light); padding: 15px; border-radius: 12px; border: 1px dashed var(--primary);">
-                <div class="question-title" style="color: var(--primary); margin-bottom: 12px;">8. Give your OVERALL institutional rating for Sunrise Public School:</div>
-                <div class="matrix-row" onclick="checkFunnels()">
-                    <div class="matrix-cell"><span class="indicator-text" style="color: #b91c1c;">Poor</span><input type="radio" name="q8" id="q8_1" value="1" required><label for="q8_1">1</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Average</span><input type="radio" name="q8" id="q8_2" value="2"><label for="q8_2">2</label></div>
-                    <div class="matrix-cell"><span class="indicator-text">Good</span><input type="radio" name="q8" id="q8_3" value="3"><label for="q8_3">3</label></div>
-                    <div class="matrix-cell"><span class="indicator-text" style="color: var(--primary);">V.Good</span><input type="radio" name="q8" id="q8_4" value="4"><label for="q8_4">4</label></div>
-                    <div class="matrix-cell"><span class="indicator-text" style="color: #16a34a;">Excellent</span><input type="radio" name="q8" id="q8_5" value="5"><label for="q8_5">5</label></div>
-                </div>
-            </div>
-
-            <div id="goodBox" class="good-box hidden">
-                <label style="color: #16a34a; font-weight:700; font-size:14px; display:block; margin-bottom:6px;">What parameters satisfied you the most? Type below:</label>
-                <textarea id="goodText" rows="3" placeholder="Staff behavior is very professional, excellent clean structure..."></textarea>
-            </div>
-
-            <div id="badBox" class="bad-box hidden">
-                <label style="color: #dc2626; font-weight:700; font-size:14px; display:block; margin-bottom:6px;">What went wrong? File a private report for executive notice:</label>
-                <textarea id="badText" rows="3" placeholder="Tell us what needs optimization..."></textarea>
-            </div>
-
-            <button type="submit" class="btn">Securely Submit Feedback</button>
-        </div>
-    </form>
-
-    <div id="loaderScreen" class="hidden loader-screen">
-        <h3 id="statusHeading" style="color: var(--primary); font-size:20px; margin-bottom:8px;">Transmitting Records...</h3>
-        <div class="spinner"></div>
-        <p id="statusSubtext" style="color: var(--text-light); font-size:14px;">Writing file cluster logs safely.</p>
     </div>
 </div>
 
 <script>
-    // CORRECTED SUNRISE PUBLIC SCHOOL DAHOD TARGET API REVIEW DIRECT INJECT URL
-    const GOOGLE_REVIEW_LINK = "https://g.page/r/ChR_KWe5ehu0EAE/review";
+    // DEEP ROUTED PARAMETER TO TARGET GOOGLE MAPS DIRECT APPLICATION INSTANCE OVERRIDE
+    const GOOGLE_APP_LINK = "intent://plus.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q#Intent;scheme=https;package=com.google.android.apps.maps;end";
+    const GOOGLE_WEB_LINK = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";
 
     function nextSection() {
         if(document.getElementById('fullName').value.trim() && document.getElementById('email').value.trim()) {
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
             window.scrollTo(0,0);
-        } else { alert("Mandatory profile logs must be entered!"); }
+        } else { alert("Profiling metrics must be entered!"); }
     }
 
-    function checkFunnels() {
-        setTimeout(() => {
-            const currentRating = parseInt(document.querySelector('input[name="q8"]:checked').value);
-            if(currentRating >= 4) {
-                document.getElementById('goodBox').classList.remove('hidden');
-                document.getElementById('badBox').classList.add('hidden');
-            } else {
-                document.getElementById('badBox').classList.remove('hidden');
-                document.getElementById('goodBox').classList.add('hidden');
-            }
-        }, 50);
+    function checkGate(val) {
+        if(val >= 4) {
+            document.getElementById('goodBox').classList.remove('hidden');
+            document.getElementById('badBox').classList.add('hidden');
+        } else {
+            document.getElementById('badBox').classList.remove('hidden');
+            document.getElementById('goodBox').classList.add('hidden');
+        }
     }
 
-    document.getElementById('premiumForm').addEventListener('submit', function(e) {
+    document.getElementById('grandEvaluationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const finalScore = parseInt(document.querySelector('input[name="q8"]:checked').value);
 
@@ -220,24 +201,24 @@
         document.getElementById('loaderScreen').classList.remove('hidden');
 
         if (finalScore >= 4) {
-            const messageBody = document.getElementById('goodText').value;
+            const copyContent = document.getElementById('goodText').value;
             
-            // Core System Clipboard Writing Stream
-            navigator.clipboard.writeText(messageBody).then(() => {
-                document.getElementById('statusHeading').innerText = "Review Content Saved!";
-                document.getElementById('statusSubtext').innerText = "Connecting directly with Google Business Panel... Just Long Press & Paste your content inside the star box!";
-            }).catch(() => {
-                document.getElementById('statusHeading').innerText = "Redirecting to Google...";
+            navigator.clipboard.writeText(copyContent).then(() => {
+                document.getElementById('statusHeading').innerText = "Feedback Copied Successfully!";
+                document.getElementById('statusSubtext').innerText = "Launching Google Maps Pane... Hold down your finger & Select 'Paste' inside the stars box.";
             });
 
-            setTimeout(() => { window.location.href = GOOGLE_REVIEW_LINK; }, 2500);
+            // TRIGGER DEEP LINK FORCE TO HIT GOOGLE MAPS MOBILE APP DIRECTLY
+            setTimeout(() => {
+                window.location.href = GOOGLE_APP_LINK;
+                // Web Fallback loop handler if Intent fails
+                setTimeout(() => { window.location.href = GOOGLE_WEB_LINK; }, 1000);
+            }, 2500);
 
         } else {
-            // Unhappy User Process Node Termination Loop
-            document.getElementById('statusHeading').innerText = "Feedback Filed Privately";
-            document.getElementById('statusHeading').style.color = "#0f172a";
+            document.getElementById('statusHeading').innerText = "Review Dispatched Privately";
             document.querySelector('.spinner').style.display = 'none';
-            document.getElementById('statusSubtext').innerText = "Thank you. Your critical remarks have been logged directly inside the Sunrise Public School management registry for executive troubleshooting.";
+            document.getElementById('statusSubtext').innerText = "Thank you. Your assessment data has been logged inside the confidential institutional directory files.";
         }
     });
 </script>
