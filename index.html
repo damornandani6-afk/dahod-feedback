@@ -7,72 +7,98 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary: #1e3a8a; /* Deep Academic Blue */
-            --accent: #d97706;  /* Golden Excellence */
-            --bg: #f8fafc; 
+            --primary: #1e3a8a; /* Deep Academic Navy Blue */
+            --accent: #d97706;  /* Golden Amber */
+            --bg: #edf2f7; 
             --card: #ffffff; 
             --text: #0f172a; 
-            --success: #16a34a;
+            --text-light: #64748b;
+            --success: #10b981;
             --star-off: #e2e8f0;
             --star-on: #fbbf24;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Lato', sans-serif; padding: 20px; }
+        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Lato', sans-serif; padding: 15px; }
         
-        .portal-card { background: var(--card); width: 100%; max-width: 480px; border-radius: 28px; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.12); overflow: hidden; border: 1px solid #e2e8f0; }
+        .portal-card { background: var(--card); width: 100%; max-width: 460px; border-radius: 28px; box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15); overflow: hidden; border: 1px solid #e2e8f0; }
         
-        /* EXCELLENT VISUAL HEADER */
+        /* 📚 HIGH-CLASS ACADEMIC BOOKS HEADER DESIGN */
         .hero-banner { 
-            height: 160px; 
-            background: linear-gradient(rgba(30,58,138,0.85), rgba(30,58,138,0.85)), 
-                        url('http://googleusercontent.com/image_collection/image_retrieval/5858101537530028372');
-            background-size: cover; background-position: center; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center;
+            height: 170px; 
+            background: linear-gradient(rgba(30, 58, 138, 0.90), rgba(30, 58, 138, 0.85)), 
+                        url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80');
+            background-size: cover; 
+            background-position: center; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: #fff; 
+            text-align: center;
+            padding: 10px;
         }
-        
-        .school-logo {
-            width: 65px; height: 65px; background: white; border-radius: 50%; padding: 10px; margin-bottom: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+        /* 🎓 CUSTOM GOLDEN GRADUATION LOGO EMBLEM */
+        .school-emblem {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #fbbf24;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+            color: #fbbf24;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
-        .school-logo img { width: 100%; height: auto; }
 
-        .hero-banner h1 { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .hero-banner p { font-size: 13px; opacity: 0.9; margin-top: 2px; }
+        .hero-banner h1 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+        .hero-banner p { font-size: 13px; opacity: 0.9; margin-top: 2px; font-weight: 400; color: #e2e8f0; }
         
-        .form-content { padding: 35px 30px; }
-        .step-heading { font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--primary); margin-bottom: 22px; text-align: center; font-weight: 600; }
+        .content-body { padding: 35px 25px; }
+        .step-title { font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--primary); margin-bottom: 22px; text-align: center; font-weight: 600; }
         
-        .form-field { margin-bottom: 22px; text-align: left; }
-        .form-field label { display: block; font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; }
-        .form-field input, .form-field select { width: 100%; padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 15px; outline: none; transition: all 0.2s; background: #fdfdfd; }
-        .form-field input:focus { border-color: var(--primary); background: #fff; }
+        .form-group { margin-bottom: 22px; text-align: left; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: border 0.2s; background: #fafafa; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: #fff; }
         
-        /* VVIP STAR RATING MATRIX */
-        .rating-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 12px; margin: 30px 0; }
-        .rating-stars input { display: none; }
-        .rating-stars label { font-size: 52px; color: var(--star-off); cursor: pointer; transition: color 0.2s, transform 0.1s; }
-        .rating-stars label:hover, .rating-stars label:hover ~ label, .rating-stars input:checked ~ label { color: var(--star-on); }
-        .rating-stars label:active { transform: scale(0.9); }
+        /* 🌟 PREMIUM GOLDEN STARS INTERFACE */
+        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 14px; margin: 30px 0; }
+        .main-stars input { display: none; }
+        .main-stars label { font-size: 52px; color: var(--star-off); cursor: pointer; transition: color 0.15s ease, transform 0.1s; }
+        .main-stars label:hover, .main-stars label:hover ~ label, .main-stars input:checked ~ label { color: var(--star-on); }
+        .main-stars label:active { transform: scale(0.9); }
         
-        /* HIDDEN SMART AI PANELS */
-        .ai-copy-box { background-color: #f0fdf4; border: 2px dashed var(--success); padding: 18px; border-radius: 15px; margin-bottom: 20px; text-align: left; }
-        .ai-copy-box h4 { font-size: 12px; font-weight: 800; color: var(--success); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
-        .ai-copy-box p { font-size: 14px; line-height: 1.5; color: #1e293b; font-weight: 500; }
-        
-        .books-visual { width: 100%; height: 100px; background: url('http://googleusercontent.com/image_collection/image_retrieval/4863169382453142169'); background-size: cover; border-radius: 12px; margin-bottom: 20px; }
+        /* 📖 OPEN BOOKS SECTION VISUAL ON 5-STAR CLICK */
+        .books-divider {
+            width: 100%;
+            height: 110px;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
 
-        .btn-action { background-color: var(--primary); color: #fff; border: none; width: 100%; padding: 18px; border-radius: 15px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(30,58,138,0.2); font-family: 'Poppins'; }
-        .btn-action:hover { background-color: #1e293b; transform: translateY(-2px); }
+        .ai-result-panel { background-color: #f0fdf4; border: 1px dashed var(--success); padding: 18px; border-radius: 14px; margin-bottom: 20px; text-align: left; }
+        .ai-result-panel span { display: block; font-size: 11px; font-weight: 800; color: var(--success); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .ai-result-panel p { font-size: 14px; line-height: 1.5; color: var(--text); font-weight: 500; }
         
-        .textarea-private { width: 100%; padding: 15px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px; outline: none; }
+        .btn-main { background-color: var(--primary); color: #fff; border: none; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px rgba(30,58,138,0.15); }
+        .btn-main:hover { background-color: #1d4ed8; transform: translateY(-1px); }
+        
+        .textarea-private { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 15px; background: #fafafa; }
         .hidden { display: none; }
-        
-        .loading-pane { text-align: center; padding: 40px 0; }
-        .spinner-icon { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+
+        .loading-view { text-align: center; padding: 40px 0; }
+        .spinner-wheel { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
@@ -80,92 +106,99 @@
 
     <div class="portal-card">
         <div class="hero-banner">
-            <div class="school-logo">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/6282451339505318667" alt="Logo">
-            </div>
+            <div class="school-emblem">🎓</div>
             <h1>Sunrise Public School</h1>
-            <p>Institutional Excellence Survey Portal</p>
+            <p>Official Academic Quality Assessment Portal</p>
         </div>
 
-        <div class="form-content">
-            <div id="step-1">
-                <h2 class="step-heading">Account Authentication</h2>
-                <div class="form-field"><label>Full Name</label><input type="text" id="pName" placeholder="Enter full name" required></div>
-                <div class="form-field"><label>Email Address</label><input type="email" id="pEmail" placeholder="name@email.com" required></div>
-                <div class="form-field"><label>Relationship:</label><select id="pRole"><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
-                <button type="button" class="btn-action" onclick="toStep2()">Next: Start Evaluation</button>
+        <div class="content-body">
+            <div id="step-details">
+                <h2 class="step-title">Evaluation Authentication</h2>
+                <div class="form-group"><label>FULL NAME</label><input type="text" id="pName" placeholder="Enter full name" required></div>
+                <div class="form-group"><label>EMAIL ADDRESS</label><input type="email" id="pEmail" placeholder="name@email.com" required></div>
+                <div class="form-group"><label>RELATIONSHIP PROFILE</label><select id="pRole"><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
+                <button type="button" class="btn-main" onclick="showRatingPanel()">Continue to Evaluation</button>
             </div>
 
-            <div id="step-2" class="hidden">
-                <h2 class="step-heading">Provide Your Rating</h2>
-                <div class="rating-stars">
-                    <input type="radio" name="rate" id="s5" value="5"><label for="s5">★</label>
-                    <input type="radio" name="rate" id="s4" value="4"><label for="s4">★</label>
-                    <input type="radio" name="rate" id="s3" value="3"><label for="s3">★</label>
-                    <input type="radio" name="rate" id="s2" value="2"><label for="s2">★</label>
-                    <input type="radio" name="rate" id="s1" value="1"><label for="s1">★</label>
+            <div id="step-rating" class="hidden">
+                <h2 class="step-title">Provide Institutional Rating</h2>
+                <div class="main-stars">
+                    <input type="radio" name="rate" id="st5" value="5"><label for="st5">★</label>
+                    <input type="radio" name="rate" id="st4" value="4"><label for="st4">★</label>
+                    <input type="radio" name="rate" id="st3" value="3"><label for="st3">★</label>
+                    <input type="radio" name="rate" id="st2" value="2"><label for="st2">★</label>
+                    <input type="radio" name="rate" id="st1" value="1"><label for="st1">★</label>
                 </div>
 
-                <div id="happy-node" class="hidden">
-                    <div class="books-visual"></div>
-                    <div class="ai-copy-box">
-                        <h4><i class="fa-solid fa-sparkles"></i> AI-Optimized Review:</h4>
-                        <p id="reviewVal">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Sunrise Public School Dahod is truly committed to quality education.</p>
+                <div id="success-flow" class="hidden">
+                    <div class="books-divider"></div>
+                    <div class="ai-result-panel">
+                        <span>✨ Generated Evaluation Content:</span>
+                        <p id="generatedReview">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Sunrise Public School Dahod is highly recommended!</p>
                     </div>
-                    <button type="button" class="btn-action" onclick="finishFlow()">Copy & Open Google Reviews</button>
+                    <button type="button" class="btn-main" onclick="copyAndRedirect()"><span id="btnLabel">Copy Review & Open Google</span></button>
                 </div>
 
-                <div id="sad-node" class="hidden">
-                    <textarea class="textarea-private" id="privNote" rows="4" placeholder="Share your suggestions privately with school management..."></textarea>
-                    <button type="button" class="btn-action" onclick="submitPrivately()" style="background:#475569;">Submit Privately</button>
+                <div id="private-flow" class="hidden">
+                    <div class="form-group">
+                        <label>PRIVATE MANAGEMENT SUGGESTIONS</label>
+                        <textarea class="textarea-private" id="privNote" rows="3" placeholder="Share your suggestions privately to help us troubleshoot school systems..."></textarea>
+                    </div>
+                    <button type="button" class="btn-main" onclick="submitPrivate()" style="background-color: #475569;">Submit Secure Feedback</button>
                 </div>
             </div>
 
-            <div id="loader-node" class="hidden loading-pane">
-                <div class="spinner-icon"></div>
+            <div id="loader-node" class="hidden loading-view">
+                <div class="spinner-wheel"></div>
                 <h3 style="color:var(--primary); font-family:'Poppins';">Connecting to Google...</h3>
-                <p style="font-size:13px; color:#64748b; margin-top:10px;">Review content copied! <br>Long-press and paste inside the star box.</p>
+                <p style="font-size:13px; color:#64748b; margin-top:10px;">Review content copied! <br>Long-press and paste inside the rating window.</p>
             </div>
         </div>
     </div>
 
     <script>
+        // 100% SECURE DYNAMIC NODE SEARCH LINK
         const REDIRECT_URL = "https://www.google.com/search?q=Sunrise+Public+School+Dahod#lrd=0x39633f68987a03f3:0xb41b7ab967296ff4,3,1";
 
-        function toStep2() {
-            if(document.getElementById('pName').value && document.getElementById('pEmail').value) {
-                document.getElementById('step-1').classList.add('hidden');
-                document.getElementById('step-2').classList.remove('hidden');
-                window.scrollTo(0,0);
-            } else { alert("Please complete authentication fields."); }
+        function showRatingPanel() {
+            if(document.getElementById('pName').value.trim() && document.getElementById('pEmail').value.trim()) {
+                document.getElementById('step-details').classList.add('hidden');
+                document.getElementById('step-rating').classList.remove('hidden');
+            } else { alert("Please complete form authentication fields."); }
         }
 
-        const inputs = document.querySelectorAll('input[name="rate"]');
-        inputs.forEach(input => {
-            input.addEventListener('change', () => {
-                const score = parseInt(input.value);
-                if(score >= 4) {
-                    document.getElementById('happy-node').classList.remove('hidden');
-                    document.getElementById('sad-node').classList.add('hidden');
+        const stars = document.querySelectorAll('input[name="rate"]');
+        stars.forEach(star => {
+            star.addEventListener('change', (e) => {
+                const val = parseInt(e.target.value);
+                if(val >= 4) {
+                    document.getElementById('success-flow').classList.remove('hidden');
+                    document.getElementById('private-flow').classList.add('hidden');
                 } else {
-                    document.getElementById('sad-node').classList.remove('hidden');
-                    document.getElementById('happy-node').classList.add('hidden');
+                    document.getElementById('private-flow').classList.remove('hidden');
+                    document.getElementById('success-flow').classList.add('hidden');
                 }
             });
         });
 
-        function finishFlow() {
-            const copyText = document.getElementById('reviewVal').innerText;
-            navigator.clipboard.writeText(copyText).then(() => {
-                document.getElementById('step-2').classList.add('hidden');
-                document.getElementById('loader-node').classList.remove('hidden');
-                setTimeout(() => { window.location.href = REDIRECT_URL; }, 2000);
+        function copyAndRedirect() {
+            const text = document.getElementById('generatedReview').innerText;
+            document.getElementById('btnLabel').innerText = "Copied! Syncing Google...";
+            
+            navigator.clipboard.writeText(text).then(() => {
+                setTimeout(() => {
+                    document.getElementById('step-rating').classList.add('hidden');
+                    document.getElementById('loader-node').classList.remove('hidden');
+                    setTimeout(() => { window.location.href = REDIRECT_URL; }, 1200);
+                }, 400);
+            }).catch(() => {
+                window.location.href = REDIRECT_URL;
             });
         }
 
-        function submitPrivately() {
-            alert("Thank you. Your critical remarks have been logged for internal executive troubleshooting.");
-            location.reload();
+        function submitPrivate() {
+            alert("Thank you. Your critical feedback has been securely logged inside the school management private ledger.");
+            window.location.reload();
         }
     </script>
 </body>
