@@ -171,11 +171,8 @@
 </div>
 
 <script>
-    // DEEP ROUTED PARAMETER TO TARGET GOOGLE MAPS DIRECT APPLICATION INSTANCE OVERRIDE
-    const GOOGLE_APP_LINK = "intent://plus.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q#Intent;scheme=https;package=com.google.android.apps.maps;end";
-    const GOOGLE_WEB_LINK = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";
-
-    function nextSection() {
+   // 100% FIXED WEB REDIRECT LINK (NO APP OPEN JHANJHAT)
+    const GOOGLE_REVIEW_LINK = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";    function nextSection() {
         if(document.getElementById('fullName').value.trim() && document.getElementById('email').value.trim()) {
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
@@ -208,14 +205,10 @@
                 document.getElementById('statusSubtext').innerText = "Launching Google Maps Pane... Hold down your finger & Select 'Paste' inside the stars box.";
             });
 
-            // TRIGGER DEEP LINK FORCE TO HIT GOOGLE MAPS MOBILE APP DIRECTLY
+            // DIRECT WEB JUMP FOR ABSOLUTE ACCURACY
             setTimeout(() => {
-                window.location.href = GOOGLE_APP_LINK;
-                // Web Fallback loop handler if Intent fails
-                setTimeout(() => { window.location.href = GOOGLE_WEB_LINK; }, 1000);
-            }, 2500);
-
-        } else {
+                window.location.href = GOOGLE_REVIEW_LINK;
+            }, 2500);        } else {
             document.getElementById('statusHeading').innerText = "Review Dispatched Privately";
             document.querySelector('.spinner').style.display = 'none';
             document.getElementById('statusSubtext').innerText = "Thank you. Your assessment data has been logged inside the confidential institutional directory files.";
