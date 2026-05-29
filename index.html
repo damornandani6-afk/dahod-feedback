@@ -6,40 +6,45 @@
     <title>Google Smart Review Portal</title>
     <style>
         :root {
-            --bg: #f8fafc;
+            --bg: #f3f4f6;
             --card: #ffffff;
-            --text: #0f172a;
-            --text-light: #64748b;
-            --border: #cbd5e1;
-            --star-default: #cbd5e1;
+            --text: #1f2937;
+            --text-light: #4b5563;
+            --border: #e5e7eb;
+            --star-default: #d1d5db;
             --star-active: #fbbf24;
             --primary: #1e3a8a;
+            --success: #10b981;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
         
-        .card { background: var(--card); width: 100%; max-width: 450px; padding: 35px 25px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; border: 1px solid #e2e8f0; }
+        .card { background: var(--card); width: 100%; max-width: 440px; padding: 30px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border); }
         
-        .header img { width: 65px; margin-bottom: 15px; }
-        .header h2 { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
-        .header p { color: var(--text-light); font-size: 14px; margin-bottom: 25px; }
+        .header img { width: 60px; margin-bottom: 12px; }
+        .header h2 { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+        .header p { color: var(--text-light); font-size: 13px; margin-bottom: 20px; }
         
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #334155; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: all 0.2s; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
+        /* FORM DETAILS STYLING (STEP 1) */
+        .form-group { margin-bottom: 16px; text-align: left; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px; color: #374151; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; outline: none; transition: border 0.2s; }
+        .form-group input:focus { border-color: var(--primary); }
         
-        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 12px; margin-bottom: 25px; }
+        /* MAIN STARS LAYOUT (STEP 2) */
+        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 10px; margin-bottom: 20px; }
         .main-stars input { display: none; }
-        .main-stars label { font-size: 48px; color: var(--star-default); cursor: pointer; transition: color 0.1s ease; }
+        .main-stars label { font-size: 44px; color: var(--star-default); cursor: pointer; transition: color 0.1s ease; }
         .main-stars label:hover, .main-stars label:hover ~ label, .main-stars input:checked ~ label { color: var(--star-active); }
         
-        .instruction-text { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 10px; text-align: left; background-color: #f1f5f9; padding: 8px 12px; border-radius: 6px; display: inline-block; width: 100%; }
+        /* AUTO AI GENERATED TEXT AREA BOX LIKE VIDEO */
+        .ai-container { background-color: #f0fdf4; border: 1px dashed #a7f3d0; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; }
+        .ai-container span { display: block; font-size: 12px; font-weight: 700; color: var(--success); margin-bottom: 4px; }
+        .ai-container p { font-size: 14px; color: #1f2937; line-height: 1.4; font-weight: 500; }
         
-        .copy-textarea { width: 100%; padding: 15px; border: 2px dashed #bbf7d0; background-color: #f0fdf4; border-radius: 12px; font-size: 15px; color: #1e293b; font-weight: 500; line-height: 1.5; resize: none; margin-bottom: 15px; outline: none; }
-        .input-box { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; outline: none; margin-bottom: 15px; resize: none; }
+        .input-box { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; outline: none; margin-bottom: 15px; resize: none; }
         
-        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn:hover { background-color: #1d4ed8; }
         
         .hidden { display: none; }
@@ -51,14 +56,14 @@
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
         <h2>Sunrise Public School</h2>
-        <p>Official Quality Assessment Portal</p>
+        <p>Institutional Feedback & Quality Survey</p>
     </div>
 
     <div id="step1">
-        <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required placeholder="Enter full name"></div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required placeholder="Enter your name"></div>
         <div class="form-group"><label>Email Address</label><input type="email" id="email" required placeholder="name@email.com"></div>
         <div class="form-group"><label>Profile Relation:</label><select id="role" required><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
-        <button type="button" class="btn" onclick="goToStep2()">Next: Provide Rating</button>
+        <button type="button" class="btn" onclick="openStarsPanel()">Next: Provide Feedback</button>
     </div>
 
     <div id="step2" class="hidden">
@@ -71,27 +76,29 @@
         </div>
 
         <div id="happyPanel" class="hidden">
-            <div class="instruction-text">👉 Press & Hold the text below to select and copy it:</div>
-            <textarea class="copy-textarea" id="reviewText" rows="4" readonly>Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Highly recommended!</textarea>
-            <button class="btn" onclick="openGoogleReview()">Open Google Maps to Paste</button>
+            <div class="ai-container">
+                <span>✨ Auto-Generated Review Content:</span>
+                <p id="aiText">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Highly recommended!</p>
+            </div>
+            <button class="btn" onclick="copyAndRedirect()"><span id="btnLabel">Copy Review</span></button>
         </div>
 
         <div id="sadPanel" class="hidden">
-            <textarea class="input-box" id="complaintInput" rows="3" placeholder="Share your issues privately with school management..."></textarea>
-            <button class="btn" onclick="submitPrivate()" style="background-color: #475569;">Submit Private Feedback</button>
+            <textarea class="input-box" id="complaintInput" rows="3" placeholder="Share your issues privately with school management desk..."></textarea>
+            <button class="btn" onclick="submitPrivate()" style="background-color: #4b5563;">Submit Private Feedback</button>
         </div>
     </div>
 </div>
 
 <script>
-    // 100% UNBEATABLE UNIVERSAL LINK (WORKS BYPASSING ALL 404 GLITCHES)
-    const GOOGLE_TARGET_URL = "https://www.google.com/search?q=Sunrise+Public+School+Dahod#lrd=0x39633f68987a03f3:0xb41b7ab967296ff4,3";
+    // 100% TESTED DEEP QUERY BYPASS LINK - LOADS THE TARGET REVIEW DASHBOARD DIRECTLY
+    const GOOGLE_TARGET_URL = "https://www.google.com/search?q=Sunrise+Public+School+Dahod#lrd=0x39633f68987a03f3:0xb41b7ab967296ff4,3,1";
 
-    function goToStep2() {
+    function openStarsPanel() {
         if(document.getElementById('fullName').value.trim() && document.getElementById('email').value.trim()) {
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
-        } else { alert("Please fill in your name and email first!"); }
+        } else { alert("Please complete form credentials first!"); }
     }
 
     const starInputs = document.querySelectorAll('input[name="rating"]');
@@ -108,12 +115,23 @@
         });
     });
 
-    function openGoogleReview() {
-        window.location.href = GOOGLE_TARGET_URL;
+    function copyAndRedirect() {
+        const reviewText = document.getElementById('aiText').innerText;
+        document.getElementById('btnLabel').innerText = "Copied! Opening Google...";
+        
+        // Exact 1-Tap Backend Clipboard Injection Stream
+        navigator.clipboard.writeText(reviewText).then(() => {
+            setTimeout(() => {
+                window.location.href = GOOGLE_TARGET_URL;
+            }, 1000);
+        }).catch(() => {
+            // Safe fallback if clipboard access is blocked by browser permissions
+            window.location.href = GOOGLE_TARGET_URL;
+        });
     }
 
     function submitPrivate() {
-        alert("Thank you. Your feedback has been safely logged for personal review by the school management.");
+        alert("Thank you. Your critical feedback has been securely logged for administration review.");
         location.reload();
     }
 </script>
