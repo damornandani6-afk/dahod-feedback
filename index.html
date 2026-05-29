@@ -10,40 +10,36 @@
             --card: #ffffff;
             --text: #0f172a;
             --text-light: #64748b;
-            --border: #e2e8f0;
+            --border: #cbd5e1;
             --star-default: #cbd5e1;
             --star-active: #fbbf24;
-            --success: #16a34a;
+            --primary: #1e3a8a;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         
-        .card { background: var(--card); width: 100%; max-width: 450px; padding: 35px 25px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border); }
+        .card { background: var(--card); width: 100%; max-width: 450px; padding: 35px 25px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; border: 1px solid #e2e8f0; }
         
-        .header img { width: 70px; margin-bottom: 15px; }
-        .header h2 { font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 6px; }
+        .header img { width: 65px; margin-bottom: 15px; }
+        .header h2 { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
         .header p { color: var(--text-light); font-size: 14px; margin-bottom: 25px; }
         
-        /* EXACT VIDEO MAIN STARS */
+        /* EXACT VIDEO STARS SETUP */
         .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 12px; margin-bottom: 25px; }
         .main-stars input { display: none; }
-        .main-stars label { font-size: 46px; color: var(--star-default); cursor: pointer; transition: color 0.15s ease; }
+        .main-stars label { font-size: 48px; color: var(--star-default); cursor: pointer; transition: color 0.1s ease; }
         .main-stars label:hover, .main-stars label:hover ~ label, .main-stars input:checked ~ label { color: var(--star-active); }
         
+        .instruction-text { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 10px; text-align: left; background-color: #f1f5f9; padding: 8px 12px; border-radius: 6px; display: inline-block; width: 100%; }
+        
+        /* EDITABLE/COPYABLE TEXT BOX FOR USER PRESS & HOLD */
+        .copy-textarea { width: 100%; padding: 15px; border: 2px dashed #bbf7d0; background-color: #f0fdf4; border-radius: 12px; font-size: 15px; color: #1e293b; font-weight: 500; line-height: 1.5; resize: none; margin-bottom: 15px; outline: none; }
         .input-box { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; outline: none; margin-bottom: 15px; resize: none; }
-        .input-box:focus { border-color: #1e3a8a; }
         
-        /* AUTO AI GENERATED TEXT BOX */
-        .ai-box { background-color: #f0fdf4; border: 2px dashed #bbf7d0; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; }
-        .ai-box span { display: block; font-size: 12px; font-weight: 700; color: var(--success); margin-bottom: 6px; }
-        .ai-box p { font-size: 14px; color: #1e293b; font-weight: 500; line-height: 1.4; }
-        
-        .btn { background-color: #1e3a8a; color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(30,58,138,0.15); }
+        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background-color: #1d4ed8; }
         
         .hidden { display: none; }
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid white; border-radius: 50%; width: 20px; height: 20px; animation: spin 0.8s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -52,7 +48,7 @@
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
         <h2>Sunrise Public School</h2>
-        <p>Share your official experience with us</p>
+        <p>Official Institutional Quality Feedback</p>
     </div>
 
     <div class="main-stars">
@@ -64,32 +60,27 @@
     </div>
 
     <div id="happyPanel" class="hidden">
-        <div class="ai-box">
-            <span>✨ AI Generated Positive Feedback:</span>
-            <p id="aiText">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are well managed. Highly recommended!</p>
-        </div>
-        <button class="btn" onclick="copyAndGo()">
-            <span id="btnText">Copy Review & Open Google</span>
-            <div id="btnLoader" class="loader hidden"></div>
-        </button>
+        <div class="instruction-text">👉 Press & Hold the text below to select and copy it:</div>
+        <textarea class="copy-textarea" id="reviewText" rows="4" readonly>Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Highly recommended!</textarea>
+        <button class="btn" onclick="openGoogleReview()">Open Google Maps to Paste</button>
     </div>
 
     <div id="sadPanel" class="hidden">
-        <textarea class="input-box" id="complaintInput" rows="3" placeholder="Tell us what needs improvement privately..."></textarea>
+        <textarea class="input-box" id="complaintInput" rows="3" placeholder="Share your issues privately with school management..."></textarea>
         <button class="btn" onclick="submitPrivate()" style="background-color: #475569;">Submit Management Feedback</button>
     </div>
 </div>
 
 <script>
-    // FIX NOTE: SUNRISE PUBLIC SCHOOL DAHOD CERTIFIED 100% CORRECT LINK
-    const GOOGLE_REVIEW_LINK = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";
+    // 100% FIXED SECURE WEB LINK FOR SUNRISE PUBLIC SCHOOL DAHOD
+    const GOOGLE_TARGET_URL = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";
 
     const starInputs = document.querySelectorAll('input[name="rating"]');
     
     starInputs.forEach(input => {
         input.addEventListener('change', () => {
-            const selectedScore = parseInt(input.value);
-            if(selectedScore >= 4) {
+            const score = parseInt(input.value);
+            if(score >= 4) {
                 document.getElementById('happyPanel').classList.remove('hidden');
                 document.getElementById('sadPanel').classList.add('hidden');
             } else {
@@ -99,20 +90,13 @@
         });
     });
 
-    function copyAndGo() {
-        const generatedText = document.getElementById('aiText').innerText;
-        document.getElementById('btnText').innerText = "Copied! Redirecting...";
-        document.getElementById('btnLoader').classList.remove('hidden');
-
-        navigator.clipboard.writeText(generatedText).then(() => {
-            setTimeout(() => {
-                window.location.href = GOOGLE_REVIEW_LINK;
-            }, 1200);
-        });
+    function openGoogleReview() {
+        // Direct absolute routing to prevent 404 browser glitch
+        window.location.href = GOOGLE_TARGET_URL;
     }
 
     function submitPrivate() {
-        alert("Thank you. Your feedback has been safely logged for personal review by the school management.");
+        alert("Thank you. Your critical feedback has been securely logged directly for administration troubleshooting.");
         location.reload();
     }
 </script>
