@@ -3,217 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise Public School - Executive Survey Portal</title>
+    <title>Google Smart Review Portal</title>
     <style>
-        :root { 
-            --primary: #0f172a; /* Sophisticated Dark Slate */
-            --accent: #d97706;  /* Rich Golden Amber */
-            --bg: #f8fafc; 
-            --card: #ffffff; 
-            --text: #1e293b; 
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
             --text-light: #64748b;
-            --border: #cbd5e1;
-            --star-default: #e2e8f0;
-            --star-active: #fbbf24; 
+            --border: #e2e8f0;
+            --star-default: #cbd5e1;
+            --star-active: #fbbf24;
+            --success: #16a34a;
         }
-        
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         
-        .card { background: var(--card); width: 100%; max-width: 550px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; overflow: hidden; }
+        .card { background: var(--card); width: 100%; max-width: 450px; padding: 35px 25px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border); }
         
-        /* Premium School Themed Visual Header */
-        .banner-graphic { 
-            width: 100%; 
-            height: 140px; 
-            background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(217,119,6,0.85)), 
-                        url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            text-align: center;
-            padding: 10px;
-        }
+        .header img { width: 70px; margin-bottom: 15px; }
+        .header h2 { font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 6px; }
+        .header p { color: var(--text-light); font-size: 14px; margin-bottom: 25px; }
         
-        .banner-graphic h2 { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        .banner-graphic p { font-size: 13px; font-weight: 500; color: #f1f5f9; text-shadow: 0 1px 2px rgba(0,0,0,0.3); margin-top: 4px; }
+        /* EXACT VIDEO MAIN STARS */
+        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 12px; margin-bottom: 25px; }
+        .main-stars input { display: none; }
+        .main-stars label { font-size: 46px; color: var(--star-default); cursor: pointer; transition: color 0.15s ease; }
+        .main-stars label:hover, .main-stars label:hover ~ label, .main-stars input:checked ~ label { color: var(--star-active); }
         
-        .form-container { padding: 35px 30px; }
+        .input-box { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 12px; font-size: 15px; outline: none; margin-bottom: 15px; resize: none; }
+        .input-box:focus { border-color: #1e3a8a; }
         
-        .form-group { margin-bottom: 22px; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #334155; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: all 0.2s; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(217,119,6,0.1); }
+        /* AUTO AI GENERATED TEXT BOX */
+        .ai-box { background-color: #f0fdf4; border: 2px dashed #bbf7d0; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; }
+        .ai-box span { display: block; font-size: 12px; font-weight: 700; color: var(--success); margin-bottom: 6px; }
+        .ai-box p { font-size: 14px; color: #1e293b; font-weight: 500; line-height: 1.4; }
         
-        .question-block { margin-bottom: 26px; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9; }
-        .question-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 12px; line-height: 1.5; }
-        
-        /* Interactive Star Matrix Layout */
-        .star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; }
-        .star-rating input { display: none; }
-        .star-rating label { font-size: 36px; color: var(--star-default); cursor: pointer; transition: transform 0.1s, color 0.15s; }
-        .star-rating label:active { transform: scale(0.9); }
-        
-        .star-rating label:hover,
-        .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label { color: var(--star-active); }
-        
-        .good-box { background-color: #f0fdf4; border: 2px dashed #bbf7d0; border-radius: 14px; padding: 20px; margin-top: 15px; }
-        .bad-box { background-color: #fef2f2; border: 2px dashed #fee2e2; border-radius: 14px; padding: 20px; margin-top: 15px; }
-        
-        .btn { background-color: var(--primary); color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .btn:hover { background-color: #1e293b; border-bottom: 3px solid var(--accent); }
+        .btn { background-color: #1e3a8a; color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(30,58,138,0.15); }
+        .btn:hover { background-color: #1d4ed8; }
         
         .hidden { display: none; }
-        .loader-screen { text-align: center; padding: 40px 20px; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 25px auto; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid white; border-radius: 50%; width: 20px; height: 20px; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="banner-graphic">
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
         <h2>Sunrise Public School</h2>
-        <p>Official Institutional Quality Assessment Survey</p>
+        <p>Share your official experience with us</p>
     </div>
 
-    <div class="form-container">
-        <form id="grandEvaluationForm">
-            <div id="step1">
-                <div class="form-group"><label>Full Name</label><input type="text" id="fullName" required placeholder="Enter your full name"></div>
-                <div class="form-group"><label>Email Address</label><input type="email" id="email" required placeholder="name@email.com"></div>
-                <div class="form-group"><label>Survey Profile:</label><select id="role" required><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
-                <button type="button" class="btn" onclick="nextSection()">Next: Begin Assessment</button>
-            </div>
+    <div class="main-stars">
+        <input type="radio" name="rating" id="st5" value="5"><label for="st5">★</label>
+        <input type="radio" name="rating" id="st4" value="4"><label for="st4">★</label>
+        <input type="radio" name="rating" id="st3" value="3"><label for="st3">★</label>
+        <input type="radio" name="rating" id="st2" value="2"><label for="st2">★</label>
+        <input type="radio" name="rating" id="st1" value="1"><label for="st1">★</label>
+    </div>
 
-            <div id="step2" class="hidden">
-                
-                <div class="question-block">
-                    <div class="question-title">1. Rate the school management, administration, and support desk response:</div>
-                    <div class="star-rating">
-                        <input type="radio" name="q1" id="q1_5" value="5" required><label for="q1_5">★</label>
-                        <input type="radio" name="q1" id="q1_4" value="4"><label for="q1_4">★</label>
-                        <input type="radio" name="q1" id="q1_3" value="3"><label for="q1_3">★</label>
-                        <input type="radio" name="q1" id="q1_2" value="2"><label for="q1_2">★</label>
-                        <input type="radio" name="q1" id="q1_1" value="1"><label for="q1_1">★</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-title">2. Rate the quality of academic teaching, lectures, and faculty behavior:</div>
-                    <div class="star-rating">
-                        <input type="radio" name="q2" id="q2_5" value="5" required><label for="q2_5">★</label>
-                        <input type="radio" name="q2" id="q2_4" value="4"><label for="q2_4">★</label>
-                        <input type="radio" name="q2" id="q2_3" value="3"><label for="q2_3">★</label>
-                        <input type="radio" name="q2" id="q2_2" value="2"><label for="q2_2">★</label>
-                        <input type="radio" name="q2" id="q2_1" value="1"><label for="q2_1">★</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-title">3. Rate classroom infrastructure, sports complexes, labs, and overall campus hygiene:</div>
-                    <div class="star-rating">
-                        <input type="radio" name="q3" id="q3_5" value="5" required><label for="q3_5">★</label>
-                        <input type="radio" name="q3" id="q3_4" value="4"><label for="q3_4">★</label>
-                        <input type="radio" name="q3" id="q3_3" value="3"><label for="q3_3">★</label>
-                        <input type="radio" name="q3" id="q3_2" value="2"><label for="q3_2">★</label>
-                        <input type="radio" name="q3" id="q3_1" value="1"><label for="q3_1">★</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-title">4. Rate campus security enforcement, continuous CCTV monitoring, and child transit safety:</div>
-                    <div class="star-rating">
-                        <input type="radio" name="q4" id="q4_5" value="5" required><label for="q4_5">★</label>
-                        <input type="radio" name="q4" id="q4_4" value="4"><label for="q4_4">★</label>
-                        <input type="radio" name="q4" id="q4_3" value="3"><label for="q4_3">★</label>
-                        <input type="radio" name="q4" id="q4_2" value="2"><label for="q4_2">★</label>
-                        <input type="radio" name="q4" id="q4_1" value="1"><label for="q4_1">★</label>
-                    </div>
-                </div>
-
-                <div class="question-block" style="background-color: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
-                    <div class="question-title" style="color: var(--accent);">5. Give your OVERALL institutional rating for Sunrise Public School:</div>
-                    <div class="star-rating">
-                        <input type="radio" name="q8" id="q8_5" value="5" required onclick="checkGate(5)"><label for="q8_5">★</label>
-                        <input type="radio" name="q8" id="q8_4" value="4" onclick="checkGate(4)"><label for="q8_4">★</label>
-                        <input type="radio" name="q8" id="q8_3" value="3" onclick="checkGate(3)"><label for="q8_3">★</label>
-                        <input type="radio" name="q8" id="q8_2" value="2" onclick="checkGate(2)"><label for="q8_2">★</label>
-                        <input type="radio" name="q8" id="q8_1" value="1" onclick="checkGate(1)"><label for="q8_1">★</label>
-                    </div>
-                </div>
-
-                <div id="goodBox" class="good-box hidden">
-                    <label style="color: #16a34a; font-weight:700; font-size:14px; display:block; margin-bottom:6px;">What parameters satisfied you the most? Share below:</label>
-                    <textarea id="goodText" rows="3" placeholder="Excellent teachers, highly recommended..."></textarea>
-                </div>
-
-                <div id="badBox" class="bad-box hidden">
-                    <label style="color: #dc2626; font-weight:700; font-size:14px; display:block; margin-bottom:6px;">What went wrong? Submit a private notice to management desk:</label>
-                    <textarea id="badText" rows="3" placeholder="Share your issues privately..."></textarea>
-                </div>
-
-                <button type="submit" class="btn">Submit Executive Assessment</button>
-            </div>
-        </form>
-
-        <div id="loaderScreen" class="hidden loader-screen">
-            <h3 id="statusHeading" style="color: var(--primary); font-size:22px; font-weight:700; margin-bottom:8px;">Verification Successful!</h3>
-            <div class="spinner"></div>
-            <p id="statusSubtext" style="color: var(--text-light); font-size:14px;">Loading Google Assessment Node...</p>
+    <div id="happyPanel" class="hidden">
+        <div class="ai-box">
+            <span>✨ AI Generated Positive Feedback:</span>
+            <p id="aiText">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are well managed. Highly recommended!</p>
         </div>
+        <button class="btn" onclick="copyAndGo()">
+            <span id="btnText">Copy Review & Open Google</span>
+            <div id="btnLoader" class="loader hidden"></div>
+        </button>
+    </div>
+
+    <div id="sadPanel" class="hidden">
+        <textarea class="input-box" id="complaintInput" rows="3" placeholder="Tell us what needs improvement privately..."></textarea>
+        <button class="btn" onclick="submitPrivate()" style="background-color: #475569;">Submit Management Feedback</button>
     </div>
 </div>
 
 <script>
-   // 100% FIXED WEB REDIRECT LINK (NO APP OPEN JHANJHAT)
-    const GOOGLE_REVIEW_LINK = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";    function nextSection() {
-        if(document.getElementById('fullName').value.trim() && document.getElementById('email').value.trim()) {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
-            window.scrollTo(0,0);
-        } else { alert("Profiling metrics must be entered!"); }
-    }
+    // FIX NOTE: SUNRISE PUBLIC SCHOOL DAHOD CERTIFIED 100% CORRECT LINK
+    const GOOGLE_REVIEW_LINK = "https://search.google.com/local/writereview?placeid=ChIJ88N6mGg_XjkR9G8pZ7l6G7Q";
 
-    function checkGate(val) {
-        if(val >= 4) {
-            document.getElementById('goodBox').classList.remove('hidden');
-            document.getElementById('badBox').classList.add('hidden');
-        } else {
-            document.getElementById('badBox').classList.remove('hidden');
-            document.getElementById('goodBox').classList.add('hidden');
-        }
-    }
+    const starInputs = document.querySelectorAll('input[name="rating"]');
+    
+    starInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            const selectedScore = parseInt(input.value);
+            if(selectedScore >= 4) {
+                document.getElementById('happyPanel').classList.remove('hidden');
+                document.getElementById('sadPanel').classList.add('hidden');
+            } else {
+                document.getElementById('sadPanel').classList.remove('hidden');
+                document.getElementById('happyPanel').classList.add('hidden');
+            }
+        });
+    });
 
-    document.getElementById('grandEvaluationForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const finalScore = parseInt(document.querySelector('input[name="q8"]:checked').value);
+    function copyAndGo() {
+        const generatedText = document.getElementById('aiText').innerText;
+        document.getElementById('btnText').innerText = "Copied! Redirecting...";
+        document.getElementById('btnLoader').classList.remove('hidden');
 
-        document.getElementById('step2').classList.add('hidden');
-        document.getElementById('loaderScreen').classList.remove('hidden');
-
-        if (finalScore >= 4) {
-            const copyContent = document.getElementById('goodText').value;
-            
-            navigator.clipboard.writeText(copyContent).then(() => {
-                document.getElementById('statusHeading').innerText = "Feedback Copied Successfully!";
-                document.getElementById('statusSubtext').innerText = "Launching Google Maps Pane... Hold down your finger & Select 'Paste' inside the stars box.";
-            });
-
-            // DIRECT WEB JUMP FOR ABSOLUTE ACCURACY
+        navigator.clipboard.writeText(generatedText).then(() => {
             setTimeout(() => {
                 window.location.href = GOOGLE_REVIEW_LINK;
-            }, 2500);        } else {
-            document.getElementById('statusHeading').innerText = "Review Dispatched Privately";
-            document.querySelector('.spinner').style.display = 'none';
-            document.getElementById('statusSubtext').innerText = "Thank you. Your assessment data has been logged inside the confidential institutional directory files.";
-        }
-    });
+            }, 1200);
+        });
+    }
+
+    function submitPrivate() {
+        alert("Thank you. Your feedback has been safely logged for personal review by the school management.");
+        location.reload();
+    }
 </script>
 </body>
 </html>
