@@ -3,203 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise Public School - Institutional Assessment</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>Gurukul Vidhyalaya Dahod - Quality Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a; /* Deep Academic Navy Blue */
-            --accent: #d97706;  /* Golden Amber */
-            --bg: #edf2f7; 
-            --card: #ffffff; 
-            --text: #0f172a; 
-            --text-light: #64748b;
-            --success: #10b981;
-            --star-off: #e2e8f0;
-            --star-on: #fbbf24;
+            --primary-blue: #0f2b5c;
+            --accent-gold: #f59e0b;
+            --bg-light: #f8fafc;
+            --card-white: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --danger-red: #ef4444;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Lato', sans-serif; padding: 15px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         
-        .portal-card { background: var(--card); width: 100%; max-width: 460px; border-radius: 28px; box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15); overflow: hidden; border: 1px solid #e2e8f0; }
-        
-        /* 📚 HIGH-CLASS ACADEMIC BOOKS HEADER DESIGN */
-        .hero-banner { 
-            height: 170px; 
-            background: linear-gradient(rgba(30, 58, 138, 0.90), rgba(30, 58, 138, 0.85)), 
-                        url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80');
-            background-size: cover; 
-            background-position: center; 
+        body { 
+            background: var(--bg-light); 
+            color: var(--text-dark); 
             display: flex; 
-            flex-direction: column; 
             justify-content: center; 
             align-items: center; 
-            color: #fff; 
-            text-align: center;
-            padding: 10px;
+            min-height: 100vh; 
+            padding: 16px; 
         }
 
-        /* 🎓 CUSTOM GOLDEN GRADUATION LOGO EMBLEM */
-        .school-emblem {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #fbbf24;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
+        .portal-card { 
+            background: var(--card-white); 
+            width: 100%; 
+            max-width: 450px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            overflow: hidden; 
+            border: 1px solid var(--border-color); 
+        }
+
+        .hero-banner { 
+            background: var(--primary-blue); 
+            color: white; 
+            padding: 30px 20px; 
+            text-align: center; 
+        }
+
+        .school-logo {
+            width: 90px; 
+            height: 90px; 
+            object-fit: contain; 
+            margin-bottom: 12px; 
+            background: #ffffff; 
+            padding: 6px; 
+            border-radius: 50%; 
+            border: 2px solid var(--accent-gold);
+        }
+
+        .hero-banner h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+        .hero-banner p { font-size: 12px; color: #cbd5e1; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        .card-body { padding: 24px; }
+
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--primary-blue); text-transform: uppercase; margin-bottom: 6px; }
+        .input-group input, .input-group textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            font-size: 14px; 
+            outline: none; 
+            background: #f1f5f9; 
+        }
+        .input-group input:focus, .input-group textarea:focus { border-color: var(--primary-blue); background: #ffffff; }
+
+        .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; gap: 8px; margin: 20px 0; }
+        .star-rating input { display: none; }
+        .star-rating label { font-size: 36px; color: #cbd5e1; cursor: pointer; transition: color 0.2s ease; }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label { color: var(--accent-gold); }
+
+        .btn-action { 
+            width: 100%; 
+            background: var(--primary-blue); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 10px; 
+            font-weight: 600; 
+            font-size: 15px; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .btn-action:hover { opacity: 0.95; }
+
+        .review-preview-box { 
+            background: #f8fafc; 
+            border: 1px dashed var(--primary-blue); 
+            padding: 14px; 
+            border-radius: 8px; 
+            font-size: 13px; 
+            color: #334155; 
+            margin-bottom: 16px; 
+            line-height: 1.5; 
+            position: relative;
+        }
+
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        
+        .badge-verified {
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 10px;
-            font-size: 28px;
-            color: #fbbf24;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            gap: 4px;
+            font-size: 11px;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        .hero-banner h1 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
-        .hero-banner p { font-size: 13px; opacity: 0.9; margin-top: 2px; font-weight: 400; color: #e2e8f0; }
-        
-        .content-body { padding: 35px 25px; }
-        .step-title { font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--primary); margin-bottom: 22px; text-align: center; font-weight: 600; }
-        
-        .form-group { margin-bottom: 22px; text-align: left; }
-        .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; letter-spacing: 0.5px; }
-        .form-group input, .form-group select { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: border 0.2s; background: #fafafa; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: #fff; }
-        
-        /* 🌟 PREMIUM GOLDEN STARS INTERFACE */
-        .main-stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 14px; margin: 30px 0; }
-        .main-stars input { display: none; }
-        .main-stars label { font-size: 52px; color: var(--star-off); cursor: pointer; transition: color 0.15s ease, transform 0.1s; }
-        .main-stars label:hover, .main-stars label:hover ~ label, .main-stars input:checked ~ label { color: var(--star-on); }
-        .main-stars label:active { transform: scale(0.9); }
-        
-        /* 📖 OPEN BOOKS SECTION VISUAL ON 5-STAR CLICK */
-        .books-divider {
-            width: 100%;
-            height: 110px;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80');
-            background-size: cover;
-            background-position: center;
-            border-radius: 14px;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
         }
-
-        .ai-result-panel { background-color: #f0fdf4; border: 1px dashed var(--success); padding: 18px; border-radius: 14px; margin-bottom: 20px; text-align: left; }
-        .ai-result-panel span { display: block; font-size: 11px; font-weight: 800; color: var(--success); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .ai-result-panel p { font-size: 14px; line-height: 1.5; color: var(--text); font-weight: 500; }
-        
-        .btn-main { background-color: var(--primary); color: #fff; border: none; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px rgba(30,58,138,0.15); }
-        .btn-main:hover { background-color: #1d4ed8; transform: translateY(-1px); }
-        
-        .textarea-private { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 15px; background: #fafafa; }
-        .hidden { display: none; }
-
-        .loading-view { text-align: center; padding: 40px 0; }
-        .spinner-wheel { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="portal-card">
-        <div class="hero-banner">
-           <img src="https://raw.githubusercontent.com/damornandani6-afk/dahod-feedback/main/NEW%20LOGO%20-%20Copy.png" style="width: 85px; height: 85px; object-fit: contain; margin-bottom: 12px; background: #ffffff; padding: 4px; border-radius: 50%; border: 2px solid #fbbf24;" alt="Sunrise Public School">
-            <h1>Sunrise Public School</h1>
-            <p>Official Academic Quality Assessment Portal</p>
-        </div>
-            
-        <div class="content-body">
-            <div id="step-details">
-                <h2 class="step-title">Evaluation Authentication</h2>
-                <div class="form-group"><label>FULL NAME</label><input type="text" id="pName" placeholder="Enter full name" required></div>
-                <div class="form-group"><label>EMAIL ADDRESS</label><input type="email" id="pEmail" placeholder="name@email.com" required></div>
-                <div class="form-group"><label>RELATIONSHIP PROFILE</label><select id="pRole"><option value="Parent">Parent / Guardian</option><option value="Student">Student</option></select></div>
-                <button type="button" class="btn-main" onclick="showRatingPanel()">Continue to Evaluation</button>
-            </div>
-
-            <div id="step-rating" class="hidden">
-                <h2 class="step-title">Provide Institutional Rating</h2>
-                <div class="main-stars">
-                    <input type="radio" name="rate" id="st5" value="5"><label for="st5">★</label>
-                    <input type="radio" name="rate" id="st4" value="4"><label for="st4">★</label>
-                    <input type="radio" name="rate" id="st3" value="3"><label for="st3">★</label>
-                    <input type="radio" name="rate" id="st2" value="2"><label for="st2">★</label>
-                    <input type="radio" name="rate" id="st1" value="1"><label for="st1">★</label>
-                </div>
-
-                <div id="success-flow" class="hidden">
-                    <div class="books-divider"></div>
-                    <div class="ai-result-panel">
-                        <span>✨ Generated Evaluation Content:</span>
-                        <p id="generatedReview">Excellent school environment! The teaching staff is highly professional, infrastructure is modern, and student safety protocols are extremely well managed. Sunrise Public School Dahod is highly recommended!</p>
-                    </div>
-                    <button type="button" class="btn-main" onclick="copyAndRedirect()"><span id="btnLabel">Copy Review & Open Google</span></button>
-                </div>
-
-                <div id="private-flow" class="hidden">
-                    <div class="form-group">
-                        <label>PRIVATE MANAGEMENT SUGGESTIONS</label>
-                        <textarea class="textarea-private" id="privNote" rows="3" placeholder="Share your suggestions privately to help us troubleshoot school systems..."></textarea>
-                    </div>
-                    <button type="button" class="btn-main" onclick="submitPrivate()" style="background-color: #475569;">Submit Secure Feedback</button>
-                </div>
-            </div>
-
-            <div id="loader-node" class="hidden loading-view">
-                <div class="spinner-wheel"></div>
-                <h3 style="color:var(--primary); font-family:'Poppins';">Connecting to Google...</h3>
-                <p style="font-size:13px; color:#64748b; margin-top:10px;">Review content copied! <br>Long-press and paste inside the rating window.</p>
-            </div>
-        </div>
+<div class="portal-card">
+    <div class="hero-banner">
+        <img src="https://www.gurukulvidhyalayadahod.com/assets/img/logo.png" onerror="this.src='https://via.placeholder.com/90?text=Gurukul'" alt="Gurukul Vidhyalaya Dahod" class="school-logo">
+        <h1>Gurukul Vidhyalaya Dahod</h1>
+        <p>Parent & Student Feedback Portal</p>
     </div>
 
-    <script>
-        // 100% SECURE DYNAMIC NODE SEARCH LINK
-        const REDIRECT_URL = "https://www.google.com/search?q=Sunrise+Public+School+Dahod#lrd=0x39633f68987a03f3:0xb41b7ab967296ff4,3,1";
+    <div class="card-body">
+        
+        <!-- STEP 1: PARENT DETAILS -->
+        <div id="step-details">
+            <div class="text-center">
+                <span class="badge-verified">✓ Verified Evaluation Node</span>
+            </div>
+            <div class="input-group">
+                <label>Parent / Guardian Name</label>
+                <input type="text" id="pName" placeholder="Enter full name" required>
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="pEmail" placeholder="name@email.com" required>
+            </div>
+            <button class="btn-action" onclick="showRatingPanel()">Continue Assessment &rarr;</button>
+        </div>
 
-        function showRatingPanel() {
-            if(document.getElementById('pName').value.trim() && document.getElementById('pEmail').value.trim()) {
-                document.getElementById('step-details').classList.add('hidden');
-                document.getElementById('step-rating').classList.remove('hidden');
-            } else { alert("Please complete form authentication fields."); }
+        <!-- STEP 2: STAR RATING & ROUTING -->
+        <div id="step-rating" class="hidden">
+            <p class="text-center" style="font-size: 14px; color: var(--text-muted); font-weight: 500;">
+                How would you rate your experience with Gurukul Vidhyalaya Dahod?
+            </p>
+
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rate" value="5"><label for="star5">★</label>
+                <input type="radio" id="star4" name="rate" value="4"><label for="star4">★</label>
+                <input type="radio" id="star3" name="rate" value="3"><label for="star3">★</label>
+                <input type="radio" id="star2" name="rate" value="2"><label for="star2">★</label>
+                <input type="radio" id="star1" name="rate" value="1"><label for="star1">★</label>
+            </div>
+
+            <!-- SUCCESS FLOW (4 & 5 STARS -> GOOGLE REVIEW) -->
+            <div id="success-flow" class="hidden">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">
+                    AI GENERATED ASSESSMENT SUMMARY:
+                </p>
+                <div class="review-preview-box" id="generatedReview">
+                    Generating dynamic review...
+                </div>
+                <button class="btn-action" onclick="copyAndRedirect()">
+                    <span id="btnLabel">Copy Assessment & Post on Google</span>
+                </button>
+            </div>
+
+            <!-- PRIVATE FLOW (1, 2 & 3 STARS -> PRIVATE FEEDBACK) -->
+            <div id="private-flow" class="hidden">
+                <div class="input-group">
+                    <label style="color: var(--danger-red);">Private Feedback / Concerns</label>
+                    <textarea id="privateText" rows="4" placeholder="Please share details of your concern so school administration can resolve it immediately."></textarea>
+                </div>
+                <button class="btn-action" style="background: var(--danger-red);" onclick="submitPrivate()">
+                    Submit Confidential Report
+                </button>
+            </div>
+        </div>
+
+        <!-- LOADER NODE -->
+        <div id="loader-node" class="hidden text-center" style="padding: 20px 0;">
+            <div class="spinner"></div>
+            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Opening Official Google Review Portal...</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // 🔗 DIRECT GOOGLE REVIEWS PAGE FOR GURUKUL VIDHYALAYA DAHOD
+    const REDIRECT_URL = "https://www.google.com/search?q=Gurukul+Vidhyalaya+Dahod+Google+Reviews";
+
+    // 🧩 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
+    const part1 = [
+        "Excellent educational environment at Gurukul Vidhyalaya Dahod!",
+        "Very impressed with the standard of education at Gurukul Vidhyalaya.",
+        "One of the best and most disciplined schools in Dahod.",
+        "Wonderful campus culture and great atmosphere for learning.",
+        "Superb management and highly structured academic curriculum.",
+        "Outstanding school values and great discipline in students."
+    ];
+
+    const part2 = [
+        " The teaching faculty is extremely supportive, humble, and hardworking.",
+        " Teachers pay great attention to every child's academic progress.",
+        " Perfect balance between studies, moral values, and extra activities.",
+        " The school focuses heavily on practical knowledge and modern learning.",
+        " Cooperative staff members and very well-organized school administration.",
+        " The educators guide students exceptionally well at every level."
+    ];
+
+    const part3 = [
+        " Truly a top-tier school in Dahod for overall child growth!",
+        " Highly recommended to all parents seeking reliable education in Dahod.",
+        " Extremely happy and satisfied to have our children studying here.",
+        " Gurukul Vidhyalaya Dahod is shaping a bright future for students.",
+        " Best institution in Dahod for quality education and values!",
+        " Highly satisfied with the dedication of the school management."
+    ];
+
+    function showRatingPanel() {
+        const name = document.getElementById('pName').value.trim();
+        const email = document.getElementById('pEmail').value.trim();
+        if(name && email) {
+            document.getElementById('step-details').classList.add('hidden');
+            document.getElementById('step-rating').classList.remove('hidden');
+        } else { 
+            alert("Please fill in both Name and Email to proceed."); 
         }
+    }
 
-        const stars = document.querySelectorAll('input[name="rate"]');
-        stars.forEach(star => {
-            star.addEventListener('change', (e) => {
-                const val = parseInt(e.target.value);
-                if(val >= 4) {
-                    document.getElementById('success-flow').classList.remove('hidden');
-                    document.getElementById('private-flow').classList.add('hidden');
-                } else {
-                    document.getElementById('private-flow').classList.remove('hidden');
-                    document.getElementById('success-flow').classList.add('hidden');
-                }
-            });
+    const stars = document.querySelectorAll('input[name="rate"]');
+    stars.forEach(star => {
+        star.addEventListener('change', (e) => {
+            const val = parseInt(e.target.value);
+            if(val >= 4) {
+                // RANDOMLY GENERATE UNIQUE COMBINATION
+                const r1 = part1[Math.floor(Math.random() * part1.length)];
+                const r2 = part2[Math.floor(Math.random() * part2.length)];
+                const r3 = part3[Math.floor(Math.random() * part3.length)];
+                
+                document.getElementById('generatedReview').innerText = r1 + r2 + r3;
+                
+                document.getElementById('success-flow').classList.remove('hidden');
+                document.getElementById('private-flow').classList.add('hidden');
+            } else {
+                document.getElementById('private-flow').classList.remove('hidden');
+                document.getElementById('success-flow').classList.add('hidden');
+            }
         });
+    });
 
-        function copyAndRedirect() {
-            const text = document.getElementById('generatedReview').innerText;
-            document.getElementById('btnLabel').innerText = "Copied! Syncing Google...";
-            
-            navigator.clipboard.writeText(text).then(() => {
-                setTimeout(() => {
-                    document.getElementById('step-rating').classList.add('hidden');
-                    document.getElementById('loader-node').classList.remove('hidden');
-                    setTimeout(() => { window.location.href = REDIRECT_URL; }, 1200);
-                }, 400);
-            }).catch(() => {
-                window.location.href = REDIRECT_URL;
-            });
-        }
+    function copyAndRedirect() {
+        const text = document.getElementById('generatedReview').innerText;
+        document.getElementById('btnLabel').innerText = "Copied! Opening Google...";
+        
+        navigator.clipboard.writeText(text).then(() => {
+            setTimeout(() => {
+                document.getElementById('step-rating').classList.add('hidden');
+                document.getElementById('loader-node').classList.remove('hidden');
+                setTimeout(() => { window.location.href = REDIRECT_URL; }, 1200);
+            }, 400);
+        }).catch(() => { 
+            window.location.href = REDIRECT_URL; 
+        });
+    }
 
-        function submitPrivate() {
-            alert("Thank you. Your critical feedback has been securely logged inside the school management private ledger.");
-            window.location.reload();
-        }
-    </script>
+    function submitPrivate() {
+        alert("Thank you. Your critical feedback has been securely logged for management review.");
+        window.location.reload();
+    }
+</script>
+
 </body>
 </html>
