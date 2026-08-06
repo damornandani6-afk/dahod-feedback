@@ -216,7 +216,36 @@
 
 <script>
     // 🔗 DIRECT GOOGLE REVIEWS PAGE FOR GURUKUL VIDHYALAYA DAHOD
-    const REDIRECT_URL = "https://formspree.io/f/xzeppnle";
+    const REDIRECT_URL = "https://g.page/r/CSPhDSQDghy4EAE/review";
+    <script>
+    // 🔗 DIRECT GOOGLE REVIEWS PAGE FOR GURUKUL VIDHYALAYA DAHOD
+    const REDIRECT_URL = "https://g.page/r/CSPhDSQDghy4EAE/review";
+
+    // 📩 Formspree par data bhejne ka function
+    async function sendToFormspree(data) {
+        try {
+            let response = await fetch("https://formspree.io/f/xzeppnle", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                alert("Aapka feedback safaltapurvak submit ho gaya hai! Dhanyawad.");
+                window.location.reload();
+            } else {
+                alert("Feedback bhejne mein error aaya. Kripya dubara try karein.");
+            }
+        } catch (error) {
+            alert("Network error! Kripya internet check karein.");
+        }
+    }
+
+    // 🧩 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
+    const part1 = [
 
     // 🧩 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
     const part1 = [
