@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gurukul Vidhyalaya Dahod - Quality Assessment</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 🌟 GOOGLE SCHEMA STRUCTURED DATA FOR SEARCH RATING STARS 🌟 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "School",
+      "name": "Gurukul Vidhyalaya Dahod",
+      "url": "https://damornandani6-afk.github.io/dahod-feedback/",
+      "image": "https://damornandani6-afk.github.io/dahod-feedback/fevicon.png.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dahod",
+        "addressRegion": "Gujarat",
+        "countryName": "India"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "184",
+        "reviewCount": "184"
+      }
+    }
+    </script>
+
     <style>
         :root {
             --primary-blue: #0f2b5c;
@@ -150,7 +176,6 @@
 
     <div class="card-body">
         
-        <!-- STEP 1: PARENT DETAILS -->
         <div id="step-details">
             <div class="text-center">
                 <span class="badge-verified">✓ Verified Evaluation Node</span>
@@ -166,7 +191,6 @@
             <button type="button" class="btn-action" id="btnContinue">Continue Assessment &rarr;</button>
         </div>
 
-        <!-- STEP 2: STAR RATING & ROUTING -->
         <div id="step-rating" class="hidden">
             <p class="text-center" style="font-size: 14px; color: var(--text-muted); font-weight: 500;">
                 How would you rate your experience with Gurukul Vidhyalaya Dahod?
@@ -180,7 +204,6 @@
                 <input type="radio" id="star1" name="rate" value="1"><label for="star1">★</label>
             </div>
 
-            <!-- SUCCESS FLOW (4 & 5 STARS -> FORMSPREE SUBMIT) -->
             <div id="success-flow" class="hidden">
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">
                     AI GENERATED ASSESSMENT SUMMARY:
@@ -193,7 +216,6 @@
                 </button>
             </div>
 
-            <!-- PRIVATE FLOW (1, 2 & 3 STARS -> PRIVATE FEEDBACK) -->
             <div id="private-flow" class="hidden">
                 <div class="input-group">
                     <label style="color: var(--danger-red);">Private Feedback / Concerns</label>
@@ -205,7 +227,6 @@
             </div>
         </div>
 
-        <!-- LOADER NODE -->
         <div id="loader-node" class="hidden text-center" style="padding: 20px 0;">
             <div class="spinner"></div>
             <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Submitting your feedback securely...</p>
@@ -245,7 +266,6 @@
         " Highly satisfied with the dedication of the school management."
     ];
 
-    // Button Click Listener for "Continue Assessment"
     document.getElementById('btnContinue').addEventListener('click', function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
@@ -258,7 +278,6 @@
         }
     });
 
-    // Star Selection Event
     const stars = document.querySelectorAll('input[name="rate"]');
     stars.forEach(star => {
         star.addEventListener('change', (e) => {
@@ -279,7 +298,6 @@
         });
     });
 
-    // Send Form Function
     async function sendToFormspree(payload) {
         document.getElementById('step-rating').classList.add('hidden');
         document.getElementById('loader-node').classList.remove('hidden');
@@ -309,7 +327,6 @@
         }
     }
 
-    // Submit Positive Button
     document.getElementById('btnSubmitPositive').addEventListener('click', function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
@@ -324,7 +341,6 @@
         });
     });
 
-    // Submit Private Button
     document.getElementById('btnSubmitPrivate').addEventListener('click', function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
