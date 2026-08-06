@@ -3,346 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gurukul Vidhyalaya Dahod - Quality Assessment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Gurukul Vidhyalaya Dahod - Feedback Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-blue: #0f2b5c;
-            --accent-gold: #f59e0b;
-            --bg-light: #f8fafc;
-            --card-white: #ffffff;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --danger-red: #ef4444;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        
-        body { 
-            background: var(--bg-light); 
-            color: var(--text-dark); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            padding: 16px; 
-        }
-
-        .portal-card { 
-            background: var(--card-white); 
-            width: 100%; 
-            max-width: 450px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
-            overflow: hidden; 
-            border: 1px solid var(--border-color); 
-        }
-
-        .hero-banner { 
-            background: var(--primary-blue); 
-            color: white; 
-            padding: 30px 20px; 
-            text-align: center; 
-        }
-
-        .school-logo {
-            width: 90px; 
-            height: 90px; 
-            object-fit: contain; 
-            margin-bottom: 12px; 
-            background: #ffffff; 
-            padding: 6px; 
-            border-radius: 50%; 
-            border: 2px solid var(--accent-gold);
-        }
-
-        .hero-banner h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-        .hero-banner p { font-size: 12px; color: #cbd5e1; letter-spacing: 0.5px; text-transform: uppercase; }
-
-        .card-body { padding: 24px; }
-
-        .input-group { margin-bottom: 16px; }
-        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--primary-blue); text-transform: uppercase; margin-bottom: 6px; }
-        .input-group input, .input-group textarea { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid var(--border-color); 
-            border-radius: 8px; 
-            font-size: 14px; 
-            outline: none; 
-            background: #f1f5f9; 
-        }
-        .input-group input:focus, .input-group textarea:focus { border-color: var(--primary-blue); background: #ffffff; }
-
-        .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; gap: 8px; margin: 20px 0; }
-        .star-rating input { display: none; }
-        .star-rating label { font-size: 36px; color: #cbd5e1; cursor: pointer; transition: color 0.2s ease; }
-        .star-rating input:checked ~ label,
-        .star-rating label:hover,
-        .star-rating label:hover ~ label { color: var(--accent-gold); }
-
-        .btn-action { 
-            width: 100%; 
-            background: var(--primary-blue); 
-            color: white; 
-            border: none; 
-            padding: 14px; 
-            border-radius: 10px; 
-            font-weight: 600; 
-            font-size: 15px; 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 8px; 
-        }
-        .btn-action:hover { opacity: 0.95; }
-
-        .review-preview-box { 
-            background: #f8fafc; 
-            border: 1px dashed var(--primary-blue); 
-            padding: 14px; 
-            border-radius: 8px; 
-            font-size: 13px; 
-            color: #334155; 
-            margin-bottom: 16px; 
-            line-height: 1.5; 
-            position: relative;
-        }
-
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        
-        .badge-verified {
-            display: inline-flex;
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 4px 10px;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
             border-radius: 12px;
-            margin-bottom: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1a365d;
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 12px;
+            border: 3px solid #ffffff;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e6fffa;
+            color: #234e52;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .step-panel {
+            display: none;
+        }
+
+        .step-panel.active {
+            display: block;
+        }
+
+        .rating-prompt {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .stars i {
+            font-size: 32px;
+            color: #cbd5e0;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.1s ease;
+        }
+
+        .stars i:hover,
+        .stars i.active {
+            color: #ecc94b;
+        }
+
+        .stars i:active {
+            transform: scale(1.2);
+        }
+
+        .ai-box {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+
+        .ai-title {
+            font-weight: 700;
+            color: #2b6cb0;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #2b6cb0;
+        }
+
+        .btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        /* Loading View */
+        .loading-view {
+            text-align: center;
+            padding: 30px 0;
         }
 
         .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--primary-blue);
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3182ce;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+            margin: 0 auto 15px auto;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-msg {
+            color: #e53e3e;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Success View */
+        .success-icon {
+            font-size: 48px;
+            color: #38a169;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 
-<div class="portal-card">
-    <div class="hero-banner">
-        <img src="fevicon.png.jpg" onerror="this.src='https://via.placeholder.com/90?text=Gurukul'" alt="Gurukul Vidhyalaya Dahod" class="school-logo">
+<div class="container">
+    <div class="header">
+        <img alt="Gurukul Vidhyalaya Dahod" src="fevicon.png.jpg" onerror="this.src='https://via.placeholder.com/80?text=GV';">
         <h1>Gurukul Vidhyalaya Dahod</h1>
         <p>Parent & Student Feedback Portal</p>
     </div>
 
-    <div class="card-body">
-        
-        <!-- STEP 1: PARENT DETAILS -->
-        <div id="step-details">
-            <div class="text-center">
-                <span class="badge-verified">✓ Verified Evaluation Node</span>
-            </div>
-            <div class="input-group">
-                <label>Parent / Guardian Name</label>
-                <input type="text" id="pName" placeholder="Enter full name" required>
-            </div>
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" id="pEmail" placeholder="name@email.com" required>
-            </div>
-            <button class="btn-action" onclick="showRatingPanel()">Continue Assessment &rarr;</button>
+    <div class="content">
+        <div style="text-align: center;">
+            <span class="badge">✓ Verified Evaluation Node</span>
         </div>
 
-        <!-- STEP 2: STAR RATING & ROUTING -->
-        <div id="step-rating" class="hidden">
-            <p class="text-center" style="font-size: 14px; color: var(--text-muted); font-weight: 500;">
-                How would you rate your experience with Gurukul Vidhyalaya Dahod?
-            </p>
+        <!-- STEP 1: Rating Screen -->
+        <div id="step-1" class="step-panel active">
+            <p class="rating-prompt">How would you rate your experience with Gurukul Vidhyalaya Dahod?</p>
 
-            <div class="star-rating">
-                <input type="radio" id="star5" name="rate" value="5"><label for="star5">★</label>
-                <input type="radio" id="star4" name="rate" value="4"><label for="star4">★</label>
-                <input type="radio" id="star3" name="rate" value="3"><label for="star3">★</label>
-                <input type="radio" id="star2" name="rate" value="2"><label for="star2">★</label>
-                <input type="radio" id="star1" name="rate" value="1"><label for="star1">★</label>
+            <div class="stars" id="star-rating">
+                <i class="fa-solid fa-star" data-value="1"></i>
+                <i class="fa-solid fa-star" data-value="2"></i>
+                <i class="fa-solid fa-star" data-value="3"></i>
+                <i class="fa-solid fa-star" data-value="4"></i>
+                <i class="fa-solid fa-star" data-value="5"></i>
             </div>
 
-            <!-- SUCCESS FLOW (4 & 5 STARS -> FORMSPREE SUBMIT) -->
-            <div id="success-flow" class="hidden">
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">
-                    AI GENERATED ASSESSMENT SUMMARY:
-                </p>
-                <div class="review-preview-box" id="generatedReview">
-                    Generating dynamic review...
-                </div>
-                <button class="btn-action" onclick="submitPositiveReview()">
-                    <span id="btnLabel">Submit Assessment</span>
-                </button>
+            <div class="ai-box">
+                <div class="ai-title"><i class="fa-solid fa-robot"></i> AI GENERATED ASSESSMENT SUMMARY</div>
+                <div id="ai-text">Please select a rating to generate dynamic assessment...</div>
             </div>
 
-            <!-- PRIVATE FLOW (1, 2 & 3 STARS -> PRIVATE FEEDBACK) -->
-            <div id="private-flow" class="hidden">
-                <div class="input-group">
-                    <label style="color: var(--danger-red);">Private Feedback / Concerns</label>
-                    <textarea id="privateText" rows="4" placeholder="Please share details of your concern so school administration can resolve it immediately."></textarea>
-                </div>
-                <button class="btn-action" style="background: var(--danger-red);" onclick="submitPrivate()">
-                    Submit Confidential Report
-                </button>
+            <button id="continue-btn" class="btn">Continue Assessment</button>
+            <p id="error-msg" class="error-msg">Please select a star rating first!</p>
+        </div>
+
+        <!-- STEP 2: Loading Screen -->
+        <div id="step-loading" class="step-panel">
+            <div class="loading-view">
+                <div class="spinner"></div>
+                <p>Submitting your feedback securely...</p>
             </div>
         </div>
 
-        <!-- LOADER NODE -->
-        <div id="loader-node" class="hidden text-center" style="padding: 20px 0;">
-            <div class="spinner"></div>
-            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Submitting your feedback securely...</p>
+        <!-- STEP 3: Thank You / Complete Screen -->
+        <div id="step-success" class="step-panel" style="text-align: center;">
+            <i class="fa-solid fa-circle-check success-icon"></i>
+            <h2>Thank You!</h2>
+            <p style="margin-top: 10px; color: #4a5568;">Your feedback has been successfully recorded for Gurukul Vidhyalaya Dahod.</p>
         </div>
 
     </div>
 </div>
 
 <script>
-    // FORMSPREE ENDPOINT LINK
-    const FORMSPREE_URL = "https://formspree.io/f/xzeppnle";
-    let selectedRating = 5;
+    let selectedRating = 0;
 
-    // 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
-    const part1 = [
-        "Excellent educational environment at Gurukul Vidhyalaya Dahod!",
-        "Very impressed with the standard of education at Gurukul Vidhyalaya.",
-        "One of the best and most disciplined schools in Dahod.",
-        "Wonderful campus culture and great atmosphere for learning.",
-        "Superb management and highly structured academic curriculum.",
-        "Outstanding school values and great discipline in students."
-    ];
+    const stars = document.querySelectorAll('#star-rating i');
+    const aiText = document.getElementById('ai-text');
+    const continueBtn = document.getElementById('continue-btn');
+    const errorMsg = document.getElementById('error-msg');
 
-    const part2 = [
-        " The teaching faculty is extremely supportive, humble, and hardworking.",
-        " Teachers pay great attention to every child's academic progress.",
-        " Perfect balance between studies, moral values, and extra activities.",
-        " The school focuses heavily on practical knowledge and modern learning.",
-        " Cooperative staff members and very well-organized school administration.",
-        " The educators guide students exceptionally well at every level."
-    ];
+    const step1 = document.getElementById('step-1');
+    const stepLoading = document.getElementById('step-loading');
+    const stepSuccess = document.getElementById('step-success');
 
-    const part3 = [
-        " Truly a top-tier school in Dahod for overall child growth!",
-        " Highly recommended to all parents seeking reliable education in Dahod.",
-        " Extremely happy and satisfied to have our children studying here.",
-        " Gurukul Vidhyalaya Dahod is shaping a bright future for students.",
-        " Best institution in Dahod for quality education and values!",
-        " Highly satisfied with the dedication of the school management."
-    ];
+    // Dynamic AI Text Responses based on rating
+    const aiSummaries = {
+        1: "Assessment indicates significant areas needing improvement in communication or facilities.",
+        2: "Assessment highlights partial satisfaction. Specific educational/operational aspects need review.",
+        3: "Assessment reflects average satisfaction. Good foundation with room for institutional growth.",
+        4: "Assessment indicates high satisfaction across academics, infrastructure, and management.",
+        5: "Assessment highlights excellent parent/student satisfaction and top-tier educational experience."
+    };
 
-    function showRatingPanel() {
-        const name = document.getElementById('pName').value.trim();
-        const email = document.getElementById('pEmail').value.trim();
-        if(name && email) {
-            document.getElementById('step-details').classList.add('hidden');
-            document.getElementById('step-rating').classList.remove('hidden');
-        } else { 
-            alert("Please fill in both Name and Email to proceed."); 
-        }
-    }
-
-    const stars = document.querySelectorAll('input[name="rate"]');
+    // Star Selection Handler
     stars.forEach(star => {
-        star.addEventListener('change', (e) => {
-            selectedRating = parseInt(e.target.value);
-            if(selectedRating >= 4) {
-                // RANDOMLY GENERATE UNIQUE COMBINATION
-                const r1 = part1[Math.floor(Math.random() * part1.length)];
-                const r2 = part2[Math.floor(Math.random() * part2.length)];
-                const r3 = part3[Math.floor(Math.random() * part3.length)];
-                
-                document.getElementById('generatedReview').innerText = r1 + r2 + r3;
-                
-                document.getElementById('success-flow').classList.remove('hidden');
-                document.getElementById('private-flow').classList.add('hidden');
-            } else {
-                document.getElementById('private-flow').classList.remove('hidden');
-                document.getElementById('success-flow').classList.add('hidden');
-            }
+        star.addEventListener('click', function() {
+            selectedRating = parseInt(this.getAttribute('data-value'));
+            errorMsg.style.display = 'none';
+
+            // Highlight Stars
+            stars.forEach((s, idx) => {
+                if (idx < selectedRating) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            // Update AI Text
+            aiText.innerText = aiSummaries[selectedRating];
         });
     });
 
-    // Universal Function to Send Data to Formspree
-    async function sendToFormspree(payload) {
-        document.getElementById('step-rating').classList.add('hidden');
-        document.getElementById('loader-node').classList.remove('hidden');
-
-        try {
-            let response = await fetch(FORMSPREE_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (response.ok) {
-                alert("Thank you! Your feedback has been successfully submitted.");
-                window.location.reload();
-            } else {
-                alert("Submission failed. Please try again.");
-                document.getElementById('loader-node').classList.add('hidden');
-                document.getElementById('step-rating').classList.remove('hidden');
-            }
-        } catch (error) {
-            alert("Network Error! Please check your internet connection.");
-            document.getElementById('loader-node').classList.add('hidden');
-            document.getElementById('step-rating').classList.remove('hidden');
-        }
-    }
-
-    // Handle 4 and 5 Star Positive Reviews
-    function submitPositiveReview() {
-        const name = document.getElementById('pName').value.trim();
-        const email = document.getElementById('pEmail').value.trim();
-        const reviewText = document.getElementById('generatedReview').innerText;
-
-        sendToFormspree({
-            Name: name,
-            Email: email,
-            Rating: selectedRating + " Stars",
-            Feedback: reviewText,
-            Type: "Positive Assessment"
-        });
-    }
-
-    // Handle 1, 2, and 3 Star Private Feedback
-    function submitPrivate() {
-        const name = document.getElementById('pName').value.trim();
-        const email = document.getElementById('pEmail').value.trim();
-        const feedbackText = document.getElementById('privateText').value.trim();
-
-        if (!feedbackText) {
-            alert("Please share details of your concern before submitting.");
+    // Continue Button Handler
+    continueBtn.addEventListener('click', function() {
+        if (selectedRating === 0) {
+            errorMsg.style.display = 'block';
             return;
         }
 
-        sendToFormspree({
-            Name: name,
-            Email: email,
-            Rating: selectedRating + " Stars",
-            Feedback: feedbackText,
-            Type: "Confidential Report"
-        });
-    }
+        // Switch to Loading Step
+        step1.classList.remove('active');
+        stepLoading.classList.add('active');
+
+        // Simulate Submission Processing (2 Seconds delay)
+        setTimeout(() => {
+            stepLoading.classList.remove('active');
+            stepSuccess.classList.add('active');
+        }, 2000);
+    });
 </script>
 
 </body>
