@@ -180,7 +180,7 @@
                 <input type="radio" id="star1" name="rate" value="1"><label for="star1">★</label>
             </div>
 
-            <!-- SUCCESS FLOW (4 & 5 STARS -> GOOGLE REVIEW) -->
+            <!-- SUCCESS FLOW (4 & 5 STARS -> FORMSPREE SUBMIT) -->
             <div id="success-flow" class="hidden">
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">
                     AI GENERATED ASSESSMENT SUMMARY:
@@ -188,8 +188,8 @@
                 <div class="review-preview-box" id="generatedReview">
                     Generating dynamic review...
                 </div>
-                <button class="btn-action" onclick="copyAndRedirect()">
-                    <span id="btnLabel">Copy Assessment & Post on Google</span>
+                <button class="btn-action" onclick="submitPositiveReview()">
+                    <span id="btnLabel">Submit Assessment</span>
                 </button>
             </div>
 
@@ -208,46 +208,18 @@
         <!-- LOADER NODE -->
         <div id="loader-node" class="hidden text-center" style="padding: 20px 0;">
             <div class="spinner"></div>
-            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Opening Official Google Review Portal...</p>
+            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Submitting your feedback securely...</p>
         </div>
 
     </div>
 </div>
 
 <script>
-    // 🔗 DIRECT GOOGLE REVIEWS PAGE FOR GURUKUL VIDHYALAYA DAHOD
-    const REDIRECT_URL = "https://g.page/r/CSPhDSQDghy4EAE/review";
-    <script>
-    // 🔗 DIRECT GOOGLE REVIEWS PAGE FOR GURUKUL VIDHYALAYA DAHOD
-    const REDIRECT_URL = "https://g.page/r/CSPhDSQDghy4EAE/review";
+    // FORMSPREE ENDPOINT LINK
+    const FORMSPREE_URL = "https://formspree.io/f/xzeppnle";
+    let selectedRating = 5;
 
-    // 📩 Formspree par data bhejne ka function
-    async function sendToFormspree(data) {
-        try {
-            let response = await fetch("https://formspree.io/f/xzeppnle", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-            
-            if (response.ok) {
-                alert("Aapka feedback safaltapurvak submit ho gaya hai! Dhanyawad.");
-                window.location.reload();
-            } else {
-                alert("Feedback bhejne mein error aaya. Kripya dubara try karein.");
-            }
-        } catch (error) {
-            alert("Network error! Kripya internet check karein.");
-        }
-    }
-
-    // 🧩 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
-    const part1 = [
-
-    // 🧩 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
+    // 216+ UNIQUE PERMUTATION ENGINE FOR GURUKUL VIDHYALAYA DAHOD
     const part1 = [
         "Excellent educational environment at Gurukul Vidhyalaya Dahod!",
         "Very impressed with the standard of education at Gurukul Vidhyalaya.",
@@ -289,8 +261,8 @@
     const stars = document.querySelectorAll('input[name="rate"]');
     stars.forEach(star => {
         star.addEventListener('change', (e) => {
-            const val = parseInt(e.target.value);
-            if(val >= 4) {
+            selectedRating = parseInt(e.target.value);
+            if(selectedRating >= 4) {
                 // RANDOMLY GENERATE UNIQUE COMBINATION
                 const r1 = part1[Math.floor(Math.random() * part1.length)];
                 const r2 = part2[Math.floor(Math.random() * part2.length)];
@@ -307,24 +279,69 @@
         });
     });
 
-    function copyAndRedirect() {
-        const text = document.getElementById('generatedReview').innerText;
-        document.getElementById('btnLabel').innerText = "Copied! Opening Google...";
-        
-        navigator.clipboard.writeText(text).then(() => {
-            setTimeout(() => {
-                document.getElementById('step-rating').classList.add('hidden');
-                document.getElementById('loader-node').classList.remove('hidden');
-                setTimeout(() => { window.location.href = REDIRECT_URL; }, 1200);
-            }, 400);
-        }).catch(() => { 
-            window.location.href = REDIRECT_URL; 
+    // Universal Function to Send Data to Formspree
+    async function sendToFormspree(payload) {
+        document.getElementById('step-rating').classList.add('hidden');
+        document.getElementById('loader-node').classList.remove('hidden');
+
+        try {
+            let response = await fetch(FORMSPREE_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                alert("Thank you! Your feedback has been successfully submitted.");
+                window.location.reload();
+            } else {
+                alert("Submission failed. Please try again.");
+                document.getElementById('loader-node').classList.add('hidden');
+                document.getElementById('step-rating').classList.remove('hidden');
+            }
+        } catch (error) {
+            alert("Network Error! Please check your internet connection.");
+            document.getElementById('loader-node').classList.add('hidden');
+            document.getElementById('step-rating').classList.remove('hidden');
+        }
+    }
+
+    // Handle 4 and 5 Star Positive Reviews
+    function submitPositiveReview() {
+        const name = document.getElementById('pName').value.trim();
+        const email = document.getElementById('pEmail').value.trim();
+        const reviewText = document.getElementById('generatedReview').innerText;
+
+        sendToFormspree({
+            Name: name,
+            Email: email,
+            Rating: selectedRating + " Stars",
+            Feedback: reviewText,
+            Type: "Positive Assessment"
         });
     }
 
+    // Handle 1, 2, and 3 Star Private Feedback
     function submitPrivate() {
-        alert("Thank you. Your critical feedback has been securely logged for management review.");
-        window.location.reload();
+        const name = document.getElementById('pName').value.trim();
+        const email = document.getElementById('pEmail').value.trim();
+        const feedbackText = document.getElementById('privateText').value.trim();
+
+        if (!feedbackText) {
+            alert("Please share details of your concern before submitting.");
+            return;
+        }
+
+        sendToFormspree({
+            Name: name,
+            Email: email,
+            Rating: selectedRating + " Stars",
+            Feedback: feedbackText,
+            Type: "Confidential Report"
+        });
     }
 </script>
 
