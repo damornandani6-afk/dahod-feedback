@@ -5,32 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gurukul Vidhyalaya Dahod - Quality Assessment</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- 🌟 GOOGLE SCHEMA STRUCTURED DATA FOR SEARCH RATING STARS 🌟 -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "School",
-      "name": "Gurukul Vidhyalaya Dahod",
-      "url": "https://damornandani6-afk.github.io/dahod-feedback/",
-      "image": "https://damornandani6-afk.github.io/dahod-feedback/fevicon.png.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Dahod",
-        "addressRegion": "Gujarat",
-        "countryName": "India"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "bestRating": "5",
-        "worstRating": "1",
-        "ratingCount": "184",
-        "reviewCount": "184"
-      }
-    }
-    </script>
-
     <style>
         :root {
             --primary-blue: #0f2b5c;
@@ -212,7 +186,7 @@
                     Generating dynamic review...
                 </div>
                 <button type="button" class="btn-action" id="btnSubmitPositive">
-                    <span>Submit Assessment</span>
+                    <span>Submit & Post on Justdial</span>
                 </button>
             </div>
 
@@ -229,14 +203,19 @@
 
         <div id="loader-node" class="hidden text-center" style="padding: 20px 0;">
             <div class="spinner"></div>
-            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Submitting your feedback securely...</p>
+            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Publishing review live & opening Justdial...</p>
         </div>
 
     </div>
 </div>
 
 <script>
-    const FORMSPREE_URL = "https://jsdl.in/RSL-IQO1786084439";
+    // 🔗 PASTE YOUR GOOGLE APP SCRIPT WEB APP URL HERE
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXjAYKcqwZK52sWgZbXSRJoAm30Vbe6YcaiYNKSjSnl2x6pJPe1flfVdyIgpalCS-avA/exec";
+
+    // 🔗 PASTE YOUR JUSTDIAL REVIEW URL HERE
+    const JUSTDIAL_URL = "https://jsdl.in/RSL-EAD1786086488";
+
     let selectedRating = 5;
 
     const part1 = [
@@ -298,50 +277,39 @@
         });
     });
 
-    async function sendToFormspree(payload) {
-        document.getElementById('step-rating').classList.add('hidden');
-        document.getElementById('loader-node').classList.remove('hidden');
-
-        try {
-            let response = await fetch(FORMSPREE_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (response.ok) {
-                alert("Thank you! Your feedback has been successfully submitted.");
-                window.location.reload();
-            } else {
-                alert("Submission failed. Please try again.");
-                document.getElementById('loader-node').classList.add('hidden');
-                document.getElementById('step-rating').classList.remove('hidden');
-            }
-        } catch (error) {
-            alert("Network Error! Please check your internet connection.");
-            document.getElementById('loader-node').classList.add('hidden');
-            document.getElementById('step-rating').classList.remove('hidden');
-        }
-    }
-
-    document.getElementById('btnSubmitPositive').addEventListener('click', function() {
+    document.getElementById('btnSubmitPositive').addEventListener('click', async function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
         const reviewText = document.getElementById('generatedReview').innerText;
 
-        sendToFormspree({
-            Name: name,
-            Email: email,
-            Rating: selectedRating + " Stars",
-            Feedback: reviewText,
-            Type: "Positive Assessment"
-        });
+        document.getElementById('step-rating').classList.add('hidden');
+        document.getElementById('loader-node').classList.remove('hidden');
+
+        // Copy review text to clipboard
+        navigator.clipboard.writeText(reviewText);
+
+        try {
+            // Direct Google Sheet Database mein send karein
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    Name: name,
+                    Email: email,
+                    Rating: selectedRating + " Stars",
+                    Feedback: reviewText
+                })
+            });
+        } catch(err) {
+            console.log("Sheet post error", err);
+        }
+
+        alert("Aapka review website par Live ho gaya hai aur text copy ho gaya hai! Ab Justdial par Paste karke 5-Star submit karein.");
+        window.location.href = JUSTDIAL_URL;
     });
 
-    document.getElementById('btnSubmitPrivate').addEventListener('click', function() {
+    document.getElementById('btnSubmitPrivate').addEventListener('click', async function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
         const feedbackText = document.getElementById('privateText').value.trim();
@@ -351,13 +319,27 @@
             return;
         }
 
-        sendToFormspree({
-            Name: name,
-            Email: email,
-            Rating: selectedRating + " Stars",
-            Feedback: feedbackText,
-            Type: "Confidential Report"
-        });
+        document.getElementById('step-rating').classList.add('hidden');
+        document.getElementById('loader-node').classList.remove('hidden');
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    Name: name,
+                    Email: email,
+                    Rating: selectedRating + " Stars",
+                    Feedback: "[PRIVATE] " + feedbackText
+                })
+            });
+        } catch(err) {
+            console.log("Sheet post error", err);
+        }
+
+        alert("Thank you! Your confidential report has been submitted to school management.");
+        window.location.reload();
     });
 </script>
 
