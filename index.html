@@ -203,7 +203,7 @@
 
         <div id="loader-node" class="hidden text-center" style="padding: 20px 0;">
             <div class="spinner"></div>
-            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Publishing review & opening Justdial...</p>
+            <p style="font-size: 13px; color: var(--text-muted); font-weight: 600;" id="loader-text">Processing...</p>
         </div>
 
     </div>
@@ -211,10 +211,10 @@
 
 <script>
     // 🔗 PASTE YOUR GOOGLE APP SCRIPT WEB APP URL HERE
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXjAYKcqwZK52sWgZbXSRJoAm30Vbe6YcaiYNKSjSnl2x6pJPe1flfVdyIgpalCS-avA/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznzJ15m6p7LtWB3RRIXlmygc8lw-61i_7RPkR2IvYri0yf_ixZlzYTF52JXDNbuP9cnA/exec";
 
     // 🔗 PASTE YOUR JUSTDIAL REVIEW URL HERE
-    const JUSTDIAL_URL = "https://jsdl.in/RSL-EAD1786086488";
+    const JUSTDIAL_URL = "https://jsdl.in/RSL-LQA1786342709";
 
     let selectedRating = 5;
 
@@ -261,6 +261,8 @@
     stars.forEach(star => {
         star.addEventListener('change', (e) => {
             selectedRating = parseInt(e.target.value);
+
+            // STRICT FILTERING: 4 and 5 Stars go to Justdial Flow
             if(selectedRating >= 4) {
                 const r1 = part1[Math.floor(Math.random() * part1.length)];
                 const r2 = part2[Math.floor(Math.random() * part2.length)];
@@ -271,25 +273,27 @@
                 document.getElementById('success-flow').classList.remove('hidden');
                 document.getElementById('private-flow').classList.add('hidden');
             } else {
+                // 1, 2, 3 Stars go to Private Complaint Box (JUSTDIAL IS HIDDEN)
                 document.getElementById('private-flow').classList.remove('hidden');
                 document.getElementById('success-flow').classList.add('hidden');
             }
         });
     });
 
+    // 4/5 STAR POSITIVE SUBMISSION
     document.getElementById('btnSubmitPositive').addEventListener('click', async function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
         const reviewText = document.getElementById('generatedReview').innerText;
 
         document.getElementById('step-rating').classList.add('hidden');
+        document.getElementById('loader-text').innerText = "Publishing live & opening Justdial...";
         document.getElementById('loader-node').classList.remove('hidden');
 
         // Copy review text to clipboard
         navigator.clipboard.writeText(reviewText);
 
         try {
-            // Direct Google Sheet Database mein send karein
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
@@ -305,10 +309,11 @@
             console.log("Sheet post error", err);
         }
 
-        alert("Aapka review live database mein chala gaya hai aur text copy ho gaya hai! Ab Justdial par Paste karke 5-Star submit karein.");
+        alert("Aapka review website par live ho gaya hai aur text copy ho gaya hai! Ab Justdial par Paste karke 5-Star submit karein.");
         window.location.href = JUSTDIAL_URL;
     });
 
+    // 1/2/3 STAR PRIVATE SUBMISSION (NO JUSTDIAL REDIRECT)
     document.getElementById('btnSubmitPrivate').addEventListener('click', async function() {
         const name = document.getElementById('pName').value.trim();
         const email = document.getElementById('pEmail').value.trim();
@@ -320,6 +325,7 @@
         }
 
         document.getElementById('step-rating').classList.add('hidden');
+        document.getElementById('loader-text').innerText = "Submitting confidential report to management...";
         document.getElementById('loader-node').classList.remove('hidden');
 
         try {
@@ -338,7 +344,7 @@
             console.log("Sheet post error", err);
         }
 
-        alert("Thank you! Your confidential report has been submitted to school management.");
+        alert("Thank you! Your confidential report has been submitted directly to school management.");
         window.location.reload();
     });
 </script>
